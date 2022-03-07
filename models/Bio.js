@@ -15,8 +15,8 @@ const BioSchema = new Schema({
   resumeLink: { type: String, required: true },
   jobTitle: { type: [String], required: true },
   aboutMe: { type: String, required: true },
-  github: { url: { type: String, required: true } },
-  linkedin: { url: { type: String, required: true } },
+  github: { url: { type: String } },
+  linkedin: { url: { type: String } },
   experience: [
     {
       title: { type: String, required: true },
