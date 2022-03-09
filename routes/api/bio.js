@@ -40,8 +40,6 @@ router.post(
       check("resumeLink", "Resume Link is required").not().isEmpty(),
       check("jobTitle", "Job Title is required").not().isEmpty(),
       check("aboutMe", "About Me is required").not().isEmpty(),
-      check("github", "Github is required").not().isEmpty(),
-      check("linkedin", "Linkedin is required").not().isEmpty(),
     ],
   ],
   async (req, res) => {
@@ -63,14 +61,10 @@ router.post(
       resumeLink,
       jobTitle,
       aboutMe,
-      github,
-      linkedin,
     } = req.body;
 
     // Build profile object
     const bioFields = {};
-    bioFields.github = {};
-    bioFields.linkedin = {};
     if (firstName) bioFields.firstName = firstName;
     if (lastName) bioFields.lastName = lastName;
     if (birthName) bioFields.birthName = birthName;
@@ -86,8 +80,6 @@ router.post(
       bioFields.jobTitle = jobTitle.split(",").map((title) => title.trim());
     }
     if (aboutMe) bioFields.aboutMe = aboutMe;
-    if (github) bioFields.github.url = github;
-    if (linkedin) bioFields.linkedin.url = linkedin;
 
     try {
       let bio = await Bio.findOne();
@@ -112,6 +104,98 @@ router.post(
     }
   }
 );
+
+// @route     PUT api/bio/social
+// @desc      Add social
+// @access    Private
+router.put(
+  "/social",
+  [
+    auth,
+    [
+      check("name", "Name is required").not().isEmpty(),
+      check("url", "URL is required").not().isEmpty(),
+    ],
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { name, url } = req.body;
+
+    const newSocial = {
+      name,
+      url,
+    };
+
+    try {
+      const bio = await Bio.findOne();
+
+      bio.social.unshift(newSocial);
+
+      await bio.save();
+
+      res.json(bio);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
+    }
+  }
+);
+
+// @route     POST api/bio/social/:social_id
+// @desc      Update bio social
+// @access    Private
+router.post("/social/:social_id", auth, async (req, res) => {
+  try {
+    const bio = await Bio.findOne();
+    if (bio) {
+      const socialIndex = await bio.social.findIndex(
+        (obj) => obj.id === req.params.social_id
+      );
+
+      if (socialIndex === -1) {
+        return res.status(400).json({ msg: "There is no social for this id" });
+      }
+
+      const { name, url } = req.body;
+
+      if (name) bio.social[socialIndex].name = name;
+      if (url) bio.social[socialIndex].url = url;
+
+      await bio.save();
+      res.json(bio);
+    }
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route     DELETE api/bio/social/:social_id
+// @desc      Delete social from bio
+// @access    Private
+router.delete("/social/:social_id", auth, async (req, res) => {
+  try {
+    const bio = await Bio.findOne();
+
+    // Get remove index
+    const removeIndex = bio.social
+      .map((item) => item.id)
+      .indexOf(req.params.social_id);
+
+    bio.social.splice(removeIndex, 1);
+
+    await bio.save();
+
+    res.json(bio);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
 
 // @route     PUT api/bio/experience
 // @desc      Add experience
@@ -424,6 +508,122 @@ router.delete("/skillset/:skillset_id", auth, async (req, res) => {
       .indexOf(req.params.skillset_id);
 
     bio.skillset.splice(removeIndex, 1);
+
+    await bio.save();
+
+    res.json(bio);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route     PUT api/bio/education
+// @desc      Add education
+// @access    Private
+router.put(
+  "/education",
+  [
+    auth,
+    [
+      check("school", "School is required").not().isEmpty(),
+      check("degree", "Degree is required").not().isEmpty(),
+      check("fieldofstudy", "Field of Study is required").not().isEmpty(),
+      check("from", "start date is required").not().isEmpty(),
+      check("description", "Description is required").not().isEmpty(),
+    ],
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { school, degree, fieldofstudy, from, to, current, description } =
+      req.body;
+
+    const newEducation = {
+      school,
+      degree,
+      fieldofstudy,
+      from,
+      to,
+      current,
+      description,
+    };
+
+    try {
+      const bio = await Bio.findOne();
+
+      bio.education.unshift(newEducation);
+
+      await bio.save();
+
+      res.json(bio);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
+    }
+  }
+);
+
+// @route     POST api/bio/education/:education_id
+// @desc      Update bio education
+// @access    Private
+router.post("/education/:education_id", auth, async (req, res) => {
+  try {
+    const bio = await Bio.findOne();
+    if (bio) {
+      const educationIndex = await bio.education.findIndex(
+        (obj) => obj.id === req.params.education_id
+      );
+
+      if (educationIndex === -1) {
+        return res
+          .status(400)
+          .json({ msg: "There is no education for this id" });
+      }
+
+      const { school, degree, fieldofstudy, from, to, current, description } =
+        req.body;
+
+      if (school) bio.education[educationIndex].school = school;
+      if (degree) bio.education[educationIndex].degree = degree;
+      if (fieldofstudy)
+        bio.education[educationIndex].fieldofstudy = fieldofstudy;
+      if (description) bio.education[educationIndex].description = description;
+      if (from) bio.education[educationIndex].from = from;
+      if (to) {
+        bio.education[educationIndex].current = false;
+        bio.education[educationIndex].to = to;
+      }
+      if (current) {
+        bio.education[educationIndex].current = current;
+        bio.education[educationIndex].to = null;
+      }
+
+      await bio.save();
+      res.json(bio);
+    }
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route     DELETE api/bio/education/:education_id
+// @desc      Delete education from bio
+// @access    Private
+router.delete("/education/:education_id", auth, async (req, res) => {
+  try {
+    const bio = await Bio.findOne();
+
+    // Get remove index
+    const removeIndex = bio.education
+      .map((item) => item.id)
+      .indexOf(req.params.education_id);
+
+    bio.education.splice(removeIndex, 1);
 
     await bio.save();
 
