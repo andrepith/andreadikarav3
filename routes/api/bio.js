@@ -257,7 +257,7 @@ router.put(
 
     const { url, image, alt, name, type } = req.body;
 
-    const newExp = {
+    const newPortofolio = {
       url,
       image,
       alt,
@@ -268,7 +268,7 @@ router.put(
     try {
       const bio = await Bio.findOne();
 
-      bio.portofolio.unshift(newExp);
+      bio.portofolio.unshift(newPortofolio);
 
       await bio.save();
 
@@ -281,7 +281,7 @@ router.put(
 );
 
 // @route     POST api/bio/portofolio/:portofolio_id
-// @desc      Update profile portofolio
+// @desc      Update bio portofolio
 // @access    Private
 router.post("/portofolio/:portofolio_id", auth, async (req, res) => {
   try {
@@ -327,6 +327,103 @@ router.delete("/portofolio/:portofolio_id", auth, async (req, res) => {
       .indexOf(req.params.portofolio_id);
 
     bio.portofolio.splice(removeIndex, 1);
+
+    await bio.save();
+
+    res.json(bio);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route     PUT api/bio/skillset
+// @desc      Add skillset
+// @access    Private
+router.put(
+  "/skillset",
+  [
+    auth,
+    [
+      check("name", "Name is required").not().isEmpty(),
+      check("image", "Image is required").not().isEmpty(),
+      check("link", "Link is required").not().isEmpty(),
+    ],
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { name, image, link } = req.body;
+
+    const newSkillset = {
+      name,
+      image,
+      link,
+    };
+
+    try {
+      const bio = await Bio.findOne();
+
+      bio.skillset.unshift(newSkillset);
+
+      await bio.save();
+
+      res.json(bio);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
+    }
+  }
+);
+
+// @route     POST api/bio/skillset/:skillset_id
+// @desc      Update bio skillset
+// @access    Private
+router.post("/skillset/:skillset_id", auth, async (req, res) => {
+  try {
+    const bio = await Bio.findOne();
+    if (bio) {
+      const skillsetIndex = await bio.skillset.findIndex(
+        (obj) => obj.id === req.params.skillset_id
+      );
+
+      if (skillsetIndex === -1) {
+        return res
+          .status(400)
+          .json({ msg: "There is no skillset for this id" });
+      }
+
+      const { name, image, link } = req.body;
+
+      if (name) bio.skillset[skillsetIndex].name = name;
+      if (image) bio.skillset[skillsetIndex].image = image;
+      if (link) bio.skillset[skillsetIndex].link = link;
+
+      await bio.save();
+      res.json(bio);
+    }
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route     DELETE api/bio/skillset/:skillset_id
+// @desc      Delete skillset from bio
+// @access    Private
+router.delete("/skillset/:skillset_id", auth, async (req, res) => {
+  try {
+    const bio = await Bio.findOne();
+
+    // Get remove index
+    const removeIndex = bio.skillset
+      .map((item) => item.id)
+      .indexOf(req.params.skillset_id);
+
+    bio.skillset.splice(removeIndex, 1);
 
     await bio.save();
 
