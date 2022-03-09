@@ -22,69 +22,96 @@ router.get("/", async (req, res) => {
 // @route     POST api/bio
 // @desc      Create or update bio
 // @access    Private
-router.post("/", auth, async (req, res) => {
-  const {
-    firstName,
-    lastName,
-    birthName,
-    birthDate,
-    birthPlace,
-    city,
-    country,
-    nationality,
-    email,
-    phone,
-    resumeLink,
-    jobTitle,
-    aboutMe,
-    github,
-    linkedin,
-  } = req.body;
-
-  // Build profile object
-  const bioFields = {};
-  // bioFields.github = {};
-  // bioFields.linkedin = {};
-  if (firstName) bioFields.firstName = firstName;
-  if (lastName) bioFields.lastName = lastName;
-  if (birthName) bioFields.birthName = birthName;
-  if (birthDate) bioFields.birthDate = birthDate;
-  if (birthPlace) bioFields.birthPlace = birthPlace;
-  if (city) bioFields.city = city;
-  if (country) bioFields.country = country;
-  if (nationality) bioFields.nationality = nationality;
-  if (email) bioFields.email = email;
-  if (phone) bioFields.phone = phone;
-  if (resumeLink) bioFields.resumeLink = resumeLink;
-  if (jobTitle) {
-    bioFields.jobTitle = jobTitle.split(",").map((title) => title.trim());
-  }
-  if (aboutMe) bioFields.aboutMe = aboutMe;
-  // if (github) bioFields.github.url = github;
-  // if (linkedin) bioFields.linkedin.url = linkedin;
-
-  try {
-    let bio = await Bio.findOne();
-    if (bio) {
-      bio = await Bio.findOneAndUpdate(
-        {},
-        {
-          $set: bioFields,
-        },
-        { new: true }
-      );
-
-      return res.json(bio);
+router.post(
+  "/",
+  [
+    auth,
+    [
+      check("firstName", "First Name is required").not().isEmpty(),
+      check("lastName", "Last Name is required").not().isEmpty(),
+      check("birthName", "Birth Name is required").not().isEmpty(),
+      check("birthDate", "Birth Date is required").not().isEmpty(),
+      check("birthPlace", "Birth Place is required").not().isEmpty(),
+      check("city", "City is required").not().isEmpty(),
+      check("country", "Country is required").not().isEmpty(),
+      check("nationality", "Nationality is required").not().isEmpty(),
+      check("email", "Email is required").not().isEmpty(),
+      check("phone", "Phone is required").not().isEmpty(),
+      check("resumeLink", "Resume Link is required").not().isEmpty(),
+      check("jobTitle", "Job Title is required").not().isEmpty(),
+      check("aboutMe", "About Me is required").not().isEmpty(),
+      check("github", "Github is required").not().isEmpty(),
+      check("linkedin", "Linkedin is required").not().isEmpty(),
+    ],
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
     }
-    // Create
-    bio = new Bio(bioFields);
-    await bio.save();
-    res.json(bio);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
+    const {
+      firstName,
+      lastName,
+      birthName,
+      birthDate,
+      birthPlace,
+      city,
+      country,
+      nationality,
+      email,
+      phone,
+      resumeLink,
+      jobTitle,
+      aboutMe,
+      github,
+      linkedin,
+    } = req.body;
+
+    // Build profile object
+    const bioFields = {};
+    bioFields.github = {};
+    bioFields.linkedin = {};
+    if (firstName) bioFields.firstName = firstName;
+    if (lastName) bioFields.lastName = lastName;
+    if (birthName) bioFields.birthName = birthName;
+    if (birthDate) bioFields.birthDate = birthDate;
+    if (birthPlace) bioFields.birthPlace = birthPlace;
+    if (city) bioFields.city = city;
+    if (country) bioFields.country = country;
+    if (nationality) bioFields.nationality = nationality;
+    if (email) bioFields.email = email;
+    if (phone) bioFields.phone = phone;
+    if (resumeLink) bioFields.resumeLink = resumeLink;
+    if (jobTitle) {
+      bioFields.jobTitle = jobTitle.split(",").map((title) => title.trim());
+    }
+    if (aboutMe) bioFields.aboutMe = aboutMe;
+    if (github) bioFields.github.url = github;
+    if (linkedin) bioFields.linkedin.url = linkedin;
+
+    try {
+      let bio = await Bio.findOne();
+      if (bio) {
+        bio = await Bio.findOneAndUpdate(
+          {},
+          {
+            $set: bioFields,
+          },
+          { new: true }
+        );
+
+        return res.json(bio);
+      }
+      // Create
+      bio = new Bio(bioFields);
+      await bio.save();
+      res.json(bio);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
+    }
   }
-});
+);
 
 // @route     PUT api/bio/experience
 // @desc      Add experience

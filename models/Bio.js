@@ -15,15 +15,15 @@ const BioSchema = new Schema({
   resumeLink: { type: String, required: true },
   jobTitle: { type: [String], required: true },
   aboutMe: { type: String, required: true },
-  github: { url: { type: String } },
-  linkedin: { url: { type: String } },
+  github: { url: { type: String, required: true } },
+  linkedin: { url: { type: String, required: true } },
   experience: [
     {
       title: { type: String, required: true },
       company: { type: String, required: true },
       location: { type: String, required: true },
-      from: { type: Date, required: true },
-      to: { type: Date },
+      from: { type: Number, required: true },
+      to: { type: Number },
       current: { type: Boolean, default: false },
       description: { type: [String], required: true },
       url: { type: String, required: true },
@@ -60,11 +60,11 @@ const BioSchema = new Schema({
         required: true,
       },
       from: {
-        type: Date,
+        type: Number,
         required: true,
       },
       to: {
-        type: Date,
+        type: Number,
       },
       current: {
         type: Boolean,
