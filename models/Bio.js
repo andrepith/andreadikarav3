@@ -33,7 +33,7 @@ const BioSchema = new Schema({
     {
       url: { type: String, required: true },
       image: { type: String, required: true },
-      alt: { type: String, required: true },
+      alt: { type: String },
       name: { type: String, required: true },
       type: { type: String, required: true },
     },
