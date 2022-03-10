@@ -41,7 +41,6 @@ interface HomeProps {
 }
 
 const Home = ({ bio }: HomeProps) => {
-  console.log(bioApi());
   const scrollToExperience = () => {
     window.location.replace("/#experience");
   };
