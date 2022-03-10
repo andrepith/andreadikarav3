@@ -1,0 +1,135 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders correctly 1`] = `
+<section
+  className="justify-content-start showcase"
+  id="project"
+>
+  <div
+    className="container"
+  >
+    <h2
+      className="section-title text-center"
+    >
+      Project.
+    </h2>
+    <div
+      className="row"
+    >
+      <div
+        className="col-lg-6 col-sm-12 mt-3 showcase-cards"
+      >
+        <a
+          className="showcase-card"
+          href="https://spacestock.com/"
+          target="__blank"
+        >
+          <span
+            style={
+              Object {
+                "background": "none",
+                "border": 0,
+                "bottom": 0,
+                "boxSizing": "border-box",
+                "display": "block",
+                "height": "initial",
+                "left": 0,
+                "margin": 0,
+                "opacity": 1,
+                "overflow": "hidden",
+                "padding": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "width": "initial",
+              }
+            }
+          >
+            <img
+              alt="spacestock-web"
+              className="showcase-image image"
+              data-nimg="fill"
+              decoding="async"
+              src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+              style={
+                Object {
+                  "border": "none",
+                  "bottom": 0,
+                  "boxSizing": "border-box",
+                  "display": "block",
+                  "height": 0,
+                  "left": 0,
+                  "margin": "auto",
+                  "maxHeight": "100%",
+                  "maxWidth": "100%",
+                  "minHeight": "100%",
+                  "minWidth": "100%",
+                  "objectFit": undefined,
+                  "objectPosition": undefined,
+                  "padding": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                  "width": 0,
+                }
+              }
+            />
+            <noscript>
+              <img
+                alt="spacestock-web"
+                className="showcase-image image"
+                data-nimg="fill"
+                decoding="async"
+                loading="lazy"
+                sizes="100vw"
+                src="/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fdqajgwdwt%2Fimage%2Fupload%2Fv1615825499%2Fspacestock-web.png&w=3840&q=75"
+                srcSet="/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fdqajgwdwt%2Fimage%2Fupload%2Fv1615825499%2Fspacestock-web.png&w=640&q=75 640w, /_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fdqajgwdwt%2Fimage%2Fupload%2Fv1615825499%2Fspacestock-web.png&w=750&q=75 750w, /_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fdqajgwdwt%2Fimage%2Fupload%2Fv1615825499%2Fspacestock-web.png&w=828&q=75 828w, /_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fdqajgwdwt%2Fimage%2Fupload%2Fv1615825499%2Fspacestock-web.png&w=1080&q=75 1080w, /_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fdqajgwdwt%2Fimage%2Fupload%2Fv1615825499%2Fspacestock-web.png&w=1200&q=75 1200w, /_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fdqajgwdwt%2Fimage%2Fupload%2Fv1615825499%2Fspacestock-web.png&w=1920&q=75 1920w, /_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fdqajgwdwt%2Fimage%2Fupload%2Fv1615825499%2Fspacestock-web.png&w=2048&q=75 2048w, /_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fdqajgwdwt%2Fimage%2Fupload%2Fv1615825499%2Fspacestock-web.png&w=3840&q=75 3840w"
+                style={
+                  Object {
+                    "border": "none",
+                    "bottom": 0,
+                    "boxSizing": "border-box",
+                    "display": "block",
+                    "height": 0,
+                    "left": 0,
+                    "margin": "auto",
+                    "maxHeight": "100%",
+                    "maxWidth": "100%",
+                    "minHeight": "100%",
+                    "minWidth": "100%",
+                    "objectFit": undefined,
+                    "objectPosition": undefined,
+                    "padding": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                    "width": 0,
+                  }
+                }
+              />
+            </noscript>
+          </span>
+          <div
+            className="image-overlay"
+          >
+            <div
+              className="image-overlay-text"
+            >
+              <p
+                className="project-company mb-0"
+              >
+                Spacestock
+              </p>
+              <p
+                className="project-title"
+              >
+                Website
+              </p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+`;

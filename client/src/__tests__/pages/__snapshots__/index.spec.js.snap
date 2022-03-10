@@ -1,0 +1,255 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders correctly 1`] = `
+Array [
+  <div
+    className="nav-overlay d-none"
+    id="navOverlay"
+  >
+    <span
+      className="nav-close"
+    >
+      <svg
+        fill="currentColor"
+        height="1em"
+        onClick={[Function]}
+        viewBox="0 0 16 16"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+        />
+        <path
+          d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
+        />
+      </svg>
+    </span>
+    <div
+      className="overlay-content"
+    >
+      <a
+        href=""
+        target="__blank"
+      >
+        github
+      </a>
+      <a
+        href=""
+        target="__blank"
+      >
+        linkedin
+      </a>
+      <a
+        href="mailto:"
+      >
+        email
+      </a>
+    </div>
+  </div>,
+  <div
+    className="fixed-top navigation"
+    id="navigation"
+  >
+    <nav
+      className="navbar navbar-expand-lg primary-nav container"
+    >
+      <a
+        aria-current="page"
+        className="nav-item nav-link pl-0 mr-4"
+        href="/"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+      >
+        
+         
+        
+      </a>
+      <button
+        aria-label="nav-mobile"
+        className="navbar-toggler"
+        onClick={[Function]}
+        type="button"
+      >
+        <svg
+          fill="white"
+          height={24}
+          viewBox="0 0 16 16"
+          width={24}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
+            fillRule="evenodd"
+          />
+        </svg>
+      </button>
+      <div
+        className="collapse navbar-collapse"
+        id="navbar"
+      >
+        <div
+          className="navbar-nav align-items-center ml-auto"
+        >
+          <a
+            className="nav-item nav-link mr-4"
+            href=""
+            target="__blank"
+          >
+            github
+          </a>
+          <a
+            className="nav-item nav-link mr-4"
+            href=""
+            target="__blank"
+          >
+            linkedin
+          </a>
+          <a
+            aria-pressed="true"
+            className="btn btn-layered offset"
+            href="mailto:"
+            role="button"
+          >
+            hire me
+          </a>
+        </div>
+      </div>
+    </nav>
+  </div>,
+  <main
+    className="wrapper"
+  >
+    <div
+      className="landing-top position-relative"
+      id="landing-top"
+    >
+      <div
+        className="container landing-top__text"
+      >
+        <div
+          className="landing-block"
+        >
+          <h1
+            className="landing-title"
+          >
+            Hey, I’m 
+            
+             - A Software 
+            <br />
+            Engineer from 
+            
+            .
+          </h1>
+          <p
+            className="mt-4"
+          >
+            
+          </p>
+          <div
+            className="d-flex mt-4"
+          >
+            <div
+              className="me-2 mt-1"
+            >
+              <svg
+                fill="white"
+                height={16}
+                viewBox="0 0 16 16"
+                width={16}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z"
+                />
+              </svg>
+            </div>
+            <a
+              className="email-link"
+              href="mailto:"
+            >
+              
+            </a>
+          </div>
+          <div
+            className="d-flex mt-2"
+          >
+            <div
+              className="me-2 mt-1"
+            >
+              <svg
+                fill="white"
+                height={16}
+                viewBox="0 0 16 16"
+                width={16}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM8 5a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 9.293V5.5A.5.5 0 0 1 8 5z"
+                />
+              </svg>
+            </div>
+            <a
+              className="download-link d-block"
+              href=""
+              target="__blank"
+            >
+              Download Resume
+            </a>
+          </div>
+        </div>
+      </div>
+      <div
+        className="landing-top__foot"
+        onClick={[Function]}
+      >
+        <svg
+          fill="white"
+          height={32}
+          viewBox="0 0 16 16"
+          width={32}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"
+          />
+        </svg>
+      </div>
+    </div>
+    <div
+      className="justify-content-start showcase"
+      id="showcase"
+    >
+      <div
+        className="container"
+      >
+        <h2
+          className="section-title text-center"
+        >
+          Showcase.
+        </h2>
+        <div
+          className="row"
+        />
+      </div>
+    </div>
+    <div
+      className="justify-content-start skillset"
+      id="skillset"
+    >
+      <div
+        className="container"
+      >
+        <h2
+          className="section-title text-center"
+        >
+          Featured Skillset.
+        </h2>
+        <div
+          className="logo-container mt-4"
+        />
+      </div>
+    </div>
+  </main>,
+]
+`;

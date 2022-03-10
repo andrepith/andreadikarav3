@@ -1,0 +1,31 @@
+a:hover,
+.nav-link {
+  &:hover,
+  &:focus {
+    color: $color-white;
+  }
+}
+
+.section-title {
+  color: $color-white;
+  text-decoration: overline;
+  text-decoration-color: $color-secondary;
+}
+
+.wrapper {
+  background: linear-gradient(90deg, $color-primary 0%, $color-secondary 100%);
+  background-size: 400% 400%;
+  animation: animateBg 10s ease infinite;
+}
+
+@keyframes animateBg {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

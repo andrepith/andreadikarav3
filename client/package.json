@@ -1,0 +1,51 @@
+{
+  "name": "andreadikarav2",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "jest",
+    "test:watch": "jest --watchAll",
+    "test:coverage": "jest --coverage",
+    "test:update-snapshot": "jest --updateSnapshot"
+  },
+  "dependencies": {
+    "axios": "^0.24.0",
+    "bootstrap": "^5.1.3",
+    "emailjs-com": "^3.2.0",
+    "gsap": "^3.9.1",
+    "next": "^12.0.10",
+    "react": "17.0.2",
+    "react-bootstrap-icons": "^1.6.1",
+    "react-dom": "17.0.2",
+    "react-vertical-timeline-component": "^3.5.2",
+    "sass": "^1.49.7",
+    "sharp": "^0.30.1",
+    "sweetalert": "^2.1.2"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "^8.11.1",
+    "@testing-library/jest-dom": "^5.15.1",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/node": "16.11.10",
+    "@types/react": "17.0.37",
+    "@types/react-test-renderer": "^17.0.1",
+    "@types/react-vertical-timeline-component": "^3.3.2",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.6",
+    "babel-jest": "^27.3.1",
+    "enzyme": "^3.11.0",
+    "enzyme-to-json": "^3.6.2",
+    "eslint": "7",
+    "eslint-config-next": "12.0.4",
+    "jest": "^27.3.1",
+    "jest-dom": "^4.0.0",
+    "node-mocks-http": "^1.11.0",
+    "react-test-renderer": "^17.0.2",
+    "ts-jest": "^27.0.7",
+    "ts-loader": "^9.2.6",
+    "typescript": "4.5.2"
+  }
+}

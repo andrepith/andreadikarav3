@@ -1,0 +1,38 @@
+.skillset {
+  margin-top: 48px;
+  padding-top: 48px;
+
+  @include for-tablet-portrait-down {
+    background: none;
+    margin: 24px;
+    padding-top: 0;
+    scroll-margin: 65px;
+  }
+}
+
+.logo-container {
+  max-width: 950px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr 1fr;
+  gap: 20px;
+  justify-items: center;
+  align-items: center;
+
+  @include for-tablet-portrait-down {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+}
+
+.logo-wrapper {
+  text-align: center;
+  width: 100px;
+  height: 100px;
+  position: relative;
+}
+
+.logo {
+  filter: drop-shadow(0.5px 0.5px 0.5px $color-white);
+}

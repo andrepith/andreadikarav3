@@ -1,0 +1,21 @@
+.footer {
+  margin-top: 72px;
+  min-height: 70px;
+  padding: 15px;
+  border-top: 1px solid $color-highlight;
+  box-shadow: 1px 1px 3px 1px $color-white;
+}
+
+.footer-content {
+  color: $color-white;
+  display: flex;
+  justify-content: space-between;
+
+  @include for-tablet-portrait-down {
+    display: block;
+
+    .footer-copyright {
+      margin-top: 24px;
+    }
+  }
+}

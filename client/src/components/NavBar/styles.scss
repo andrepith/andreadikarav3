@@ -1,0 +1,103 @@
+.navigation {
+  z-index: 1000;
+  position: fixed;
+  background: rgba(122, 97, 27, 0.178);
+  box-shadow: 0 8px 32px 0 rgb(31 38 135 / 2%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(7px);
+  border: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+
+.navbar-nav {
+  .nav-link {
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+    &:hover {
+      transform: translateY(-3px);
+      color: $color-highlight;
+    }
+  }
+}
+
+.nav-link {
+  color: $color-white;
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.primary-nav {
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.primary-nav .navbar-collapse {
+  flex-grow: unset;
+}
+
+.btn-layered {
+  background: $color-primary;
+  font-family: CircularStd, sans-serif !important;
+  font-size: 10pt;
+  font-weight: 900;
+  line-height: 1;
+  padding: 10px 26px;
+  transition: 0.1s ease-out;
+  -webkit-transition: 0.1s ease-out;
+  color: $color-white;
+}
+
+.offset:focus,
+.offset:hover {
+  color: $color-white;
+  text-decoration: none;
+}
+
+.nav-overlay {
+  height: 100%;
+  display: none;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  opacity: 0.95;
+  background-color: $color-primary;
+  overflow-x: hidden;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  z-index: 999999 !important;
+}
+
+.nav-overlay .nav-close {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 24pt;
+  color: $color-white;
+  cursor: pointer;
+}
+
+.overlay-content {
+  position: relative;
+  top: 25%;
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.nav-overlay div {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 36px;
+  color: $color-white !important;
+  display: block;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  font-weight: 700;
+}
