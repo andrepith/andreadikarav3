@@ -1,7 +1,9 @@
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import { Provider } from "react-redux";
+import store from "../store";
 import "bootstrap/dist/css/bootstrap.css";
-import "../styles/main.scss"
+import "../styles/main.scss";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -14,7 +16,9 @@ function MyApp({ Component, pageProps }: AppProps) {
           content="Personal Website of Andre Adikara"
         ></meta>
       </Head>
-      <Component {...pageProps} />
+      <Provider store={store}>
+        <Component {...pageProps} />
+      </Provider>
     </>
   );
 }
