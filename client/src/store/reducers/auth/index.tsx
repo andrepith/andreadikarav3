@@ -2,7 +2,7 @@ import { stat } from "fs";
 import { LOGIN_SUCCESS, LOGIN_FAIL } from "../../types";
 
 const initialState = {
-  token: typeof window !== "undefined" ? localStorage.getItem("token") : "",
+  token: typeof window !== "undefined" ? localStorage.getItem("token") : null,
   isAuthenticated: null,
   loading: true,
 };
