@@ -32,8 +32,6 @@ const Login = ({
     router.push("/dashboard");
   }
 
-  console.log({ isAuthenticated });
-
   return (
     <section className="login wrapper">
       {!isAuthenticated && (
