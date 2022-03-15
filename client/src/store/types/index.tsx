@@ -1,5 +1,7 @@
+export const USER_LOADED = "auth/USER_LOADED";
 export const LOGIN_SUCCESS = "auth/LOGIN_SUCCESS";
 export const LOGIN_FAIL = "auth/LOGIN_FAIL";
+export const AUTH_ERROR = "auth/AUTH_ERROR";
 export const GET_BIO = "bio/GET_BIO";
 export const UPDATE_BIO = "bio/UPDATE_BIO";
 export const ADD_SOCIAL = "bio/ADD_SOCIAL";

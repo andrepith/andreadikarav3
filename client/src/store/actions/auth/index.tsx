@@ -1,5 +1,25 @@
 import axios from "axios";
-import { LOGIN_SUCCESS, LOGIN_FAIL } from "../../types";
+import setAuthToken from "src/utils/setAuthToken";
+import {
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  USER_LOADED,
+  AUTH_ERROR,
+} from "../../types";
+
+// Login
+export const loadUser = () => (dispatch: any) => {
+  if (typeof window !== "undefined" && localStorage.token) {
+    setAuthToken(localStorage.token);
+    try {
+      dispatch({ type: USER_LOADED });
+    } catch (err) {
+      dispatch({
+        type: AUTH_ERROR,
+      });
+    }
+  }
+};
 
 // Login User
 export const login =
@@ -19,6 +39,8 @@ export const login =
         type: LOGIN_SUCCESS,
         payload: res.data,
       });
+
+      dispatch(loadUser());
     } catch (err) {
       dispatch({
         type: LOGIN_FAIL,

@@ -1,11 +1,25 @@
+import { useEffect } from "react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { Provider } from "react-redux";
 import store from "../store";
+import { loadUser } from "src/store/actions/auth";
+import setAuthToken from "src/utils/setAuthToken";
+import { AUTH_ERROR } from "src/store/types";
 import "bootstrap/dist/css/bootstrap.css";
 import "../styles/main.scss";
 
-function MyApp({ Component, pageProps }: AppProps) {
+const MyApp = ({ Component, pageProps }: AppProps) => {
+  if (typeof window !== "undefined" && localStorage.token) {
+    setAuthToken(localStorage.token);
+  } else {
+    // @ts-ignore
+    store.dispatch({ type: AUTH_ERROR });
+  }
+  useEffect(() => {
+    // @ts-ignore
+    store.dispatch(loadUser());
+  }, []);
   return (
     <>
       <Head>
@@ -21,6 +35,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Provider>
     </>
   );
-}
+};
 
 export default MyApp;
