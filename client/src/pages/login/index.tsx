@@ -1,16 +1,15 @@
 import { useState } from "react";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { login } from "src/store/actions";
+import { IRootState } from "src/store/reducers";
 
-const Login = ({
-  login,
-  isAuthenticated,
-}: {
-  login: Function;
-  isAuthenticated: boolean;
-}) => {
+const Login = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector(
+    (state: IRootState) => state.auth.isAuthenticated
+  );
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -25,7 +24,8 @@ const Login = ({
   const onSubmit = async (e: any) => {
     e.preventDefault();
     await setDisabled(true);
-    login(email, password).then(() => setDisabled(false));
+    await dispatch(login(email, password));
+    setDisabled(false);
   };
 
   if (isAuthenticated) {
@@ -71,8 +71,4 @@ const Login = ({
   );
 };
 
-const mapStateToProps = ({ auth: { isAuthenticated } }: any) => ({
-  isAuthenticated,
-});
-
-export default connect(mapStateToProps, { login })(Login);
+export default Login;

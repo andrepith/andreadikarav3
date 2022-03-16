@@ -2,13 +2,15 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { NextComponentType } from "next";
 import { useSelector } from "react-redux";
+import { IRootState } from "src/store/reducers";
 
 const withAuth = (Component: NextComponentType) => {
   const AuthenticatedComponent = () => {
     const [loaded, setLoaded] = useState(false);
     const router = useRouter();
-    // @ts-ignore
-    const isAuthenticated = useSelector(({ auth }) => auth.isAuthenticated);
+    const isAuthenticated = useSelector(
+      (state: IRootState) => state.auth.isAuthenticated
+    );
 
     useEffect(() => {
       if (!isAuthenticated) {
