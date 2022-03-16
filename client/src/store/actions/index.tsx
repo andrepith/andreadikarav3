@@ -1,4 +1,4 @@
 import { login } from "./auth";
-import { getBio } from "./bio";
+import { getBio, updateBio } from "./bio";
 
-export { login, getBio };
+export { login, getBio, updateBio };

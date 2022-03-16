@@ -14,5 +14,10 @@
     label {
       color: $color-white;
     }
+
+    &:last-child {
+      margin-top: 24px;
+      justify-content: right;
+    }
   }
 }

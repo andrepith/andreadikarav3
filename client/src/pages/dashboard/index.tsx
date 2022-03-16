@@ -1,28 +1,31 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import withAuth from "@/components/HOC/WithAuth";
-import { getBio } from "src/store/actions";
+import { getBio, updateBio } from "src/store/actions";
 import { IRootState } from "src/store/reducers";
 import { htmlDateFormat } from "@/lib/Helpers";
+
+const initialState = {
+  firstName: "",
+  lastName: "",
+  birthName: "",
+  birthDate: 0,
+  birthPlace: "",
+  city: "",
+  country: "",
+  nationality: "",
+  email: "",
+  phone: "",
+  resumeLink: "",
+  jobTitle: "",
+  aboutMe: "",
+};
 
 const Dashboard = () => {
   const dispatch = useDispatch();
   const bio = useSelector((state: IRootState) => state.bio.bio);
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    birthName: "",
-    birthDate: 0,
-    birthPlace: "",
-    city: "",
-    country: "",
-    nationality: "",
-    email: "",
-    phone: "",
-    resumeLink: "",
-    jobTitle: "",
-    aboutMe: "",
-  });
+  const [disabled, setDisabled] = useState(false);
+  const [formData, setFormData] = useState(initialState);
 
   const {
     firstName,
@@ -41,23 +44,44 @@ const Dashboard = () => {
   } = formData;
 
   useEffect(() => {
-    dispatch(getBio());
-  }, []);
+    if (!bio) dispatch(getBio());
 
-  useEffect(() => {
-    setFormData({
-      ...formData,
-      ...bio,
-      birthDate: htmlDateFormat(bio.birthDate * 1000),
-    });
-  }, [bio]);
+    if (bio) {
+      const bioData = { ...initialState };
+      for (const key in bio) {
+        // @ts-ignore
+        if (key in bioData) bioData[key] = bio[key];
+      }
+      if (Array.isArray(bioData.jobTitle))
+        bioData.jobTitle = bioData.jobTitle.join(", ");
 
-  const onChange = (e: any) =>
+      if (!isNaN(bioData.birthDate)) {
+        // @ts-ignore
+        bioData.birthDate = htmlDateFormat(bioData.birthDate * 1000);
+      }
+      setFormData(bioData);
+    }
+  }, [bio, getBio]);
+
+  const onChange = (e: any) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const onSubmit = async (e: any) => {
+    e.preventDefault();
+    await setDisabled(true);
+    await dispatch(
+      updateBio({
+        ...formData,
+        birthDate: Math.floor(new Date(formData.birthDate).getTime() / 1000),
+      })
+    );
+    setDisabled(false);
+  };
 
   return (
     <section className="wrapper">
-      <form className="container dashboard">
+      <form className="container dashboard" onSubmit={onSubmit}>
         <div className="dashboard-title">Edit Bio</div>
         <div className="form-group">
           <label>First Name</label>
@@ -181,6 +205,14 @@ const Dashboard = () => {
         <div className="form-group">
           <label>About Me</label>
           <textarea value={aboutMe} onChange={onChange} name="aboutMe" />
+        </div>
+        <div className="form-group">
+          <input
+            type="submit"
+            className="btn btn-primary dashboard-button"
+            value={disabled ? "Submiting..." : "Update Bio"}
+            disabled={disabled}
+          />
         </div>
       </form>
     </section>
