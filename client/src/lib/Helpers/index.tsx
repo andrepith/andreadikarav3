@@ -53,3 +53,14 @@ export const monthConverter = (month: number) => {
   ];
   return monthArr[month];
 };
+
+export const htmlDateFormat = (timestamp: number) => {
+  const date = new Date(timestamp);
+  return (
+    date.getFullYear() +
+    "-" +
+    (date.getMonth() + 1).toString().padStart(2, "0") +
+    "-" +
+    date.getDate()
+  );
+};

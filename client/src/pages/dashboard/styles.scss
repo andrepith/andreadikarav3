@@ -1,0 +1,18 @@
+.dashboard {
+  .dashboard-title {
+    font-weight: 400;
+    margin-bottom: 1rem;
+    font-size: 1.75rem;
+    text-align: center;
+    color: #eee;
+  }
+
+  .form-group {
+    display: grid;
+    align-items: start;
+    grid-template-columns: 15ch auto;
+    label {
+      color: $color-white;
+    }
+  }
+}

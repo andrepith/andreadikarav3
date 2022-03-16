@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import type { GetStaticProps } from "next";
 import dynamic from "next/dynamic";
 import bioApi from "../lib/BioApi";

@@ -19,3 +19,4 @@ export const DELETE_SKILLSET = "bio/DELETE_SKILLSET";
 export const ADD_EDUCATION = "bio/ADD_EDUCATION";
 export const UPDATE_EDUCATION = "bio/UPDATE_EDUCATION";
 export const DELETE_EDUCATION = "bio/DELETE_EDUCATION";
+export const BIO_ERROR = "bio/BIO_ERROR";
