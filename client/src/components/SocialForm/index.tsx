@@ -1,8 +1,61 @@
-import { useSelector } from "react-redux";
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { IRootState } from "src/store/reducers";
+import { addSocial } from "src/store/actions";
 
 const SocialForm = () => {
+  const dispatch = useDispatch();
   const bio = useSelector((state: IRootState) => state.bio.bio);
+  const [selectedSocial, setSelectedSocial] = useState("");
+  const [toggleAdd, setToggleAdd] = useState(false);
+
+  const Form = () => {
+    const [formData, setFormData] = useState({ name: "", url: "" });
+    const [disabled, setDisabled] = useState(false);
+    const { name, url } = formData;
+    const onChange = (e: any) => {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+    const onAddSocial = async (e: any) => {
+      e.preventDefault();
+      await setDisabled(true);
+      await dispatch(addSocial(formData));
+      setDisabled(false);
+      setToggleAdd(false);
+    };
+    return (
+      <form onSubmit={onAddSocial}>
+        <div className="form-group">
+          <input
+            type="name"
+            value={name}
+            onChange={onChange}
+            name="name"
+            placeholder="Social Name"
+            required
+          />
+        </div>
+        <div className="form-group">
+          <input
+            type="url"
+            value={url}
+            onChange={onChange}
+            name="url"
+            placeholder="URL"
+            required
+          />
+        </div>
+        <div className="form-group">
+          <button type="submit" className="btn btn-primary" disabled={disabled}>
+            {disabled ? "Adding..." : "Add social"}
+          </button>
+          <button onClick={() => setToggleAdd(false)} className="btn btn-ghost">
+            Cancel
+          </button>
+        </div>
+      </form>
+    );
+  };
   return (
     <section>
       <div className="social container">
@@ -27,9 +80,18 @@ const SocialForm = () => {
               </div>
             )
           )}
-          <button className="social-item">
-            <i className="fa fa-plus" />
-          </button>
+          <div className="social-item">
+            {toggleAdd ? (
+              <Form />
+            ) : (
+              <div
+                onClick={() => setToggleAdd(true)}
+                className="add-social-button"
+              >
+                <i className="fa fa-plus" />
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </section>

@@ -8,7 +8,7 @@ const withAuth = (Component: NextComponentType) => {
     const [loaded, setLoaded] = useState(false);
     const router = useRouter();
     // @ts-ignore
-    const isAuthenticated = useSelector(({ auth }) => auth.isAuthenticated);
+    const auth = useSelector((state) => state.auth);
 
     useEffect(() => {
       if (!localStorage.getItem("token")) {
@@ -16,7 +16,7 @@ const withAuth = (Component: NextComponentType) => {
       } else {
         setLoaded(true);
       }
-    }, []);
+    }, [auth]);
 
     return loaded ? <Component /> : <div />;
   };

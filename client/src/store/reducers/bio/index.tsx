@@ -1,4 +1,4 @@
-import { GET_BIO, BIO_ERROR, UPDATE_BIO } from "src/store/types";
+import { GET_BIO, BIO_ERROR, UPDATE_BIO, ADD_SOCIAL } from "src/store/types";
 
 const initialState = {
   bio: null,
@@ -12,6 +12,7 @@ const bio = (
   switch (type) {
     case GET_BIO:
     case UPDATE_BIO:
+    case ADD_SOCIAL:
       return { ...state, bio: payload };
     case BIO_ERROR:
       return { ...state, error: payload };

@@ -1,5 +1,22 @@
 import axios from "axios";
-import { GET_BIO, BIO_ERROR, UPDATE_BIO } from "src/store/types";
+import {
+  AUTH_ERROR,
+  GET_BIO,
+  BIO_ERROR,
+  UPDATE_BIO,
+  ADD_SOCIAL,
+} from "src/store/types";
+
+const bioError = (err: any) => (dispatch: any) => {
+  dispatch({
+    type: BIO_ERROR,
+    payload: { msg: err.response.statusText, status: err.response.status },
+  });
+
+  if (err.response.status === 401) {
+    dispatch({ type: AUTH_ERROR });
+  }
+};
 
 export const getBio = () => async (dispatch: any) => {
   try {
@@ -9,10 +26,7 @@ export const getBio = () => async (dispatch: any) => {
       payload: res.data,
     });
   } catch (err: any) {
-    dispatch({
-      type: BIO_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
-    });
+    dispatch(bioError(err));
   }
 };
 
@@ -30,9 +44,23 @@ export const updateBio = (formData: any) => async (dispatch: any) => {
       payload: res.data,
     });
   } catch (err: any) {
+    dispatch(bioError(err));
+  }
+};
+
+export const addSocial = (formData: any) => async (dispatch: any) => {
+  try {
+    const config = {
+      headers: {
+        "Contect-Type": "application/json",
+      },
+    };
+    const res = await axios.put("api/bio/social", formData, config);
     dispatch({
-      type: BIO_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      type: ADD_SOCIAL,
+      payload: res.data,
     });
+  } catch (err: any) {
+    dispatch(bioError(err));
   }
 };
