@@ -16,7 +16,7 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="wrapper py-4">
+    <div className="dashboard wrapper py-4">
       {bio && (
         <>
           <BioForm bio={bio} />

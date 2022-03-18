@@ -7,6 +7,9 @@ import {
   ADD_SOCIAL,
   DELETE_SOCIAL,
   UPDATE_SOCIAL,
+  ADD_EXPERIENCE,
+  DELETE_EXPERIENCE,
+  UPDATE_EXPERIENCE,
 } from "src/store/types";
 
 const bioError = (err: any) => (dispatch: any) => {
@@ -98,3 +101,20 @@ export const updateSocial =
       dispatch(bioError(err));
     }
   };
+
+export const addExperience = (formData: any) => async (dispatch: any) => {
+  try {
+    const config = {
+      headers: {
+        "Contect-Type": "application/json",
+      },
+    };
+    const res = await axios.put("api/bio/experience", formData, config);
+    dispatch({
+      type: ADD_EXPERIENCE,
+      payload: res.data,
+    });
+  } catch (err: any) {
+    dispatch(bioError(err));
+  }
+};

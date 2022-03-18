@@ -1,21 +1,27 @@
-export const getMonthYear = (timestamp: string) => {
-  const date = new Date(Number(timestamp));
+export const getMonthYear = (timestamp: number) => {
+  const date = new Date(timestamp);
   return monthConverter(date.getMonth() + 1) + " " + date.getFullYear();
 };
 
-export const getYear = (timestamp: string) => {
-  const date = new Date(Number(timestamp));
+export const getYear = (timestamp: number) => {
+  const date = new Date(timestamp);
   return date.getFullYear();
 };
 
 export const getRangeYear = (
-  firstTimestamp: string,
-  secondTimestamp: string
+  firstTimestamp: number,
+  secondTimestamp: number,
+  current?: boolean
 ) => {
-  const firstDate = new Date(Number(firstTimestamp));
-  const secondDate = new Date(Number(secondTimestamp));
+  const firstDate = new Date(firstTimestamp);
+  const secondDate = new Date(secondTimestamp);
   const firstYear = getYear(firstTimestamp);
   const secondYear = getYear(secondTimestamp);
+  if (current) {
+    return (
+      monthConverter(firstDate.getMonth() + 1) + " " + firstYear + " - Present"
+    );
+  }
   if (firstYear === secondYear) {
     return (
       monthConverter(firstDate.getMonth() + 1) +

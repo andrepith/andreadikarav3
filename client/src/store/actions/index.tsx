@@ -5,6 +5,15 @@ import {
   addSocial,
   deleteSocial,
   updateSocial,
+  addExperience,
 } from "./bio";
 
-export { login, getBio, updateBio, addSocial, deleteSocial, updateSocial };
+export {
+  login,
+  getBio,
+  updateBio,
+  addSocial,
+  deleteSocial,
+  updateSocial,
+  addExperience,
+};

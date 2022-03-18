@@ -86,38 +86,40 @@ const SocialForm = ({ bio }: any) => {
           {[...bio.social]
             .reverse()
             .map((soc: { _id: string; name: string; url: string }) => (
-              <div className="social-item" key={soc._id}>
-                {toggle.open && toggle.id === soc._id ? (
-                  <Form id={soc._id} edit={true} />
-                ) : (
-                  <>
-                    <div>
-                      <i className={`fa fa-${soc.name.toLowerCase()}`}></i>
-                      {soc.name}
-                    </div>
-                    <div className="btn-action">
-                      <button
-                        onClick={() =>
-                          setToggle({ ...toggle, open: true, id: soc._id })
-                        }
-                        className="btn-edit"
-                      >
-                        Edit
-                      </button>
-                      <button
-                        onClick={() => dispatch(deleteSocial(soc._id))}
-                        className="btn-delete"
-                      >
-                        Delete
-                      </button>
-                      <button className="btn-visit">
-                        <a href={soc.url} target="__blank">
-                          Visit
-                        </a>
-                      </button>
-                    </div>
-                  </>
-                )}
+              <div key={soc._id}>
+                <div className="social-item">
+                  {toggle.open && toggle.id === soc._id ? (
+                    <Form id={soc._id} edit={true} />
+                  ) : (
+                    <>
+                      <div>
+                        <i className={`fa fa-${soc.name.toLowerCase()}`}></i>
+                        {soc.name}
+                      </div>
+                      <div className="btn-action">
+                        <button
+                          onClick={() =>
+                            setToggle({ ...toggle, open: true, id: soc._id })
+                          }
+                          className="btn-edit"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => dispatch(deleteSocial(soc._id))}
+                          className="btn-delete"
+                        >
+                          Delete
+                        </button>
+                        <button className="btn-visit">
+                          <a href={soc.url} target="__blank">
+                            Visit
+                          </a>
+                        </button>
+                      </div>
+                    </>
+                  )}
+                </div>
               </div>
             ))}
           <div className="social-item">

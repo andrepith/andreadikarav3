@@ -82,10 +82,71 @@
         }
       }
     }
+  }
+}
 
-    .btn-delete {
-      background-color: var(--bs-danger);
-      color: $color-white;
+.experience {
+  margin-top: 24px;
+
+  .experience-items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+
+    .experience-card {
+      background-color: $color-white;
+      padding: 8px;
+      border-radius: 4px;
+
+      &__header {
+        padding-bottom: 4px;
+        margin-bottom: 4px;
+        border-bottom: solid 1px $color-grey;
+        h3 {
+          font-size: 18px;
+        }
+        h4 {
+          font-size: 14px;
+        }
+        a {
+          color: $color-secondary;
+        }
+      }
+
+      &__body {
+        li p {
+          font-size: 14px;
+        }
+
+        li {
+          &:last-child {
+            margin-bottom: 8px;
+          }
+        }
+      }
+
+      &__footer {
+        display: flex;
+        flex-direction: row-reverse;
+        gap: 10px;
+      }
+
+      &__add {
+        min-height: 210px;
+        background-color: #eee;
+        padding: 8px;
+        border-radius: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+
+        i {
+          font-size: 48px;
+          font-weight: 400;
+          color: $color-grey;
+        }
+      }
     }
   }
 }

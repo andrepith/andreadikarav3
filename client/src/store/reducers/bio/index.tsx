@@ -5,6 +5,7 @@ import {
   ADD_SOCIAL,
   DELETE_SOCIAL,
   UPDATE_SOCIAL,
+  ADD_EXPERIENCE,
 } from "src/store/types";
 
 const initialState = {
@@ -21,6 +22,7 @@ const bio = (
     case UPDATE_BIO:
     case ADD_SOCIAL:
     case UPDATE_SOCIAL:
+    case ADD_EXPERIENCE:
       return { ...state, bio: payload };
     case DELETE_SOCIAL:
       return {
