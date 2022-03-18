@@ -5,7 +5,7 @@ import SocialForm from "@/components/SocialForm";
 
 const Dashboard = () => {
   return (
-    <div className="wrapper">
+    <div className="wrapper py-4">
       <BioForm />
       <SocialForm />
     </div>

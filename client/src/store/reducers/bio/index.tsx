@@ -4,6 +4,7 @@ import {
   UPDATE_BIO,
   ADD_SOCIAL,
   DELETE_SOCIAL,
+  UPDATE_SOCIAL,
 } from "src/store/types";
 
 const initialState = {
@@ -19,6 +20,7 @@ const bio = (
     case GET_BIO:
     case UPDATE_BIO:
     case ADD_SOCIAL:
+    case UPDATE_SOCIAL:
       return { ...state, bio: payload };
     case DELETE_SOCIAL:
       return {

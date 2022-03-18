@@ -6,6 +6,7 @@ import {
   UPDATE_BIO,
   ADD_SOCIAL,
   DELETE_SOCIAL,
+  UPDATE_SOCIAL,
 } from "src/store/types";
 
 const bioError = (err: any) => (dispatch: any) => {
@@ -74,3 +75,26 @@ export const deleteSocial = (socialID: string) => async (dispatch: any) => {
     dispatch(bioError(err));
   }
 };
+
+export const updateSocial =
+  (formData: any, socialID: string) => async (dispatch: any) => {
+    try {
+      const config = {
+        headers: {
+          "Contect-Type": "application/json",
+        },
+      };
+      const res = await axios.post(
+        `api/bio/social/${socialID}`,
+        formData,
+        config
+      );
+
+      dispatch({
+        type: UPDATE_SOCIAL,
+        payload: res.data,
+      });
+    } catch (err: any) {
+      dispatch(bioError(err));
+    }
+  };
