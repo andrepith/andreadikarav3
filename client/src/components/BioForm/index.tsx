@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getBio, updateBio } from "src/store/actions";
-import { IRootState } from "src/store/reducers";
 import { htmlDateFormat } from "@/lib/Helpers";
 
 const initialState = {
@@ -20,9 +19,8 @@ const initialState = {
   aboutMe: "",
 };
 
-const BioForm = () => {
+const BioForm = ({ bio }: any) => {
   const dispatch = useDispatch();
-  const bio = useSelector((state: IRootState) => state.bio.bio);
   const [disabled, setDisabled] = useState(false);
   const [formData, setFormData] = useState(initialState);
 

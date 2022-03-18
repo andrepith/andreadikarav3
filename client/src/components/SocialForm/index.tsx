@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { IRootState } from "src/store/reducers";
+import { useDispatch } from "react-redux";
 import { addSocial, deleteSocial, updateSocial } from "src/store/actions";
 
-const SocialForm = () => {
+const SocialForm = ({ bio }: any) => {
   const dispatch = useDispatch();
-  const bio = useSelector((state: IRootState) => state.bio.bio);
   const [toggle, setToggle] = useState({ open: false, id: "" });
 
   const Form = ({ id = "", edit = false }: { id?: string; edit?: boolean }) => {
@@ -85,45 +83,43 @@ const SocialForm = () => {
       <div className="social container">
         <div className="bio-section-title">Socials</div>
         <div className="social-items">
-          {bio &&
-            bio.social &&
-            [...bio.social]
-              .reverse()
-              .map((soc: { _id: string; name: string; url: string }) => (
-                <div className="social-item" key={soc._id}>
-                  {toggle.open && toggle.id === soc._id ? (
-                    <Form id={soc._id} edit={true} />
-                  ) : (
-                    <>
-                      <div>
-                        <i className={`fa fa-${soc.name.toLowerCase()}`}></i>
-                        {soc.name}
-                      </div>
-                      <div className="btn-action">
-                        <button
-                          onClick={() =>
-                            setToggle({ ...toggle, open: true, id: soc._id })
-                          }
-                          className="btn-edit"
-                        >
-                          Edit
-                        </button>
-                        <button
-                          onClick={() => dispatch(deleteSocial(soc._id))}
-                          className="btn-delete"
-                        >
-                          Delete
-                        </button>
-                        <button className="btn-visit">
-                          <a href={soc.url} target="__blank">
-                            Visit
-                          </a>
-                        </button>
-                      </div>
-                    </>
-                  )}
-                </div>
-              ))}
+          {[...bio.social]
+            .reverse()
+            .map((soc: { _id: string; name: string; url: string }) => (
+              <div className="social-item" key={soc._id}>
+                {toggle.open && toggle.id === soc._id ? (
+                  <Form id={soc._id} edit={true} />
+                ) : (
+                  <>
+                    <div>
+                      <i className={`fa fa-${soc.name.toLowerCase()}`}></i>
+                      {soc.name}
+                    </div>
+                    <div className="btn-action">
+                      <button
+                        onClick={() =>
+                          setToggle({ ...toggle, open: true, id: soc._id })
+                        }
+                        className="btn-edit"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => dispatch(deleteSocial(soc._id))}
+                        className="btn-delete"
+                      >
+                        Delete
+                      </button>
+                      <button className="btn-visit">
+                        <a href={soc.url} target="__blank">
+                          Visit
+                        </a>
+                      </button>
+                    </div>
+                  </>
+                )}
+              </div>
+            ))}
           <div className="social-item">
             {toggle.open && !toggle.id ? (
               <Form />
