@@ -6,6 +6,7 @@ import {
   DELETE_SOCIAL,
   UPDATE_SOCIAL,
   ADD_EXPERIENCE,
+  DELETE_EXPERIENCE,
 } from "src/store/types";
 
 const initialState = {
@@ -33,6 +34,18 @@ const bio = (
           // @ts-expect-error
           social: state.bio.social.filter(
             (soc: { _id: string }) => soc._id !== payload
+          ),
+        },
+      };
+    case DELETE_EXPERIENCE:
+      return {
+        ...state,
+        bio: {
+          // @ts-expect-error
+          ...state.bio,
+          // @ts-expect-error
+          social: state.bio.experience.filter(
+            (exp: { _id: string }) => exp._id !== payload
           ),
         },
       };

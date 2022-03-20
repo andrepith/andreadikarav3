@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addExperience } from "src/store/actions";
+import { addExperience, deleteExperience } from "src/store/actions";
 import { getRangeYear, removeEmpty } from "src/lib/Helpers";
 
 interface expInterface {
@@ -217,7 +217,12 @@ const ExperienceForm = ({ bio }: any) => {
                     )}
                   </div>
                   <div className="experience-card__footer">
-                    <button className="btn-delete">Delete</button>
+                    <button
+                      className="btn-delete"
+                      onClick={() => dispatch(deleteExperience(_id))}
+                    >
+                      Delete
+                    </button>
                     <button className="btn-edit">Edit</button>
                   </div>
                 </div>

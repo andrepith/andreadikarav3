@@ -118,3 +118,12 @@ export const addExperience = (formData: any) => async (dispatch: any) => {
     dispatch(bioError(err));
   }
 };
+
+export const deleteExperience = (expID: string) => async (dispatch: any) => {
+  try {
+    await axios.delete(`api/bio/experience/${expID}`);
+    dispatch({ type: DELETE_EXPERIENCE, payload: expID });
+  } catch (err: any) {
+    dispatch(bioError(err));
+  }
+};

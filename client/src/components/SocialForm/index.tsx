@@ -93,7 +93,11 @@ const SocialForm = ({ bio }: any) => {
                   ) : (
                     <>
                       <div>
-                        <i className={`fa fa-${soc.name.toLowerCase()}`}></i>
+                        <i
+                          className={`fa fa-${
+                            soc.name && soc.name.toLowerCase()
+                          }`}
+                        ></i>
                         {soc.name}
                       </div>
                       <div className="btn-action">

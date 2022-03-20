@@ -6,6 +6,7 @@ import {
   deleteSocial,
   updateSocial,
   addExperience,
+  deleteExperience,
 } from "./bio";
 
 export {
@@ -16,4 +17,5 @@ export {
   deleteSocial,
   updateSocial,
   addExperience,
+  deleteExperience,
 };
