@@ -130,7 +130,7 @@ const SocialForm = ({ bio }: any) => {
                 onClick={() => setToggle({ ...toggle, open: true, id: "" })}
                 className="add-social-button"
               >
-                <i className="fa fa-plus" />
+                <i className="fa fa-plus toggle_add" />
               </div>
             )}
           </div>

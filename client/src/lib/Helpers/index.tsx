@@ -1,3 +1,5 @@
+import { omitBy, isNil } from "lodash";
+
 export const getMonthYear = (timestamp: number) => {
   const date = new Date(timestamp);
   return monthConverter(date.getMonth() + 1) + " " + date.getFullYear();
@@ -69,4 +71,8 @@ export const htmlDateFormat = (timestamp: number) => {
     "-" +
     date.getDate()
   );
+};
+
+export const removeEmpty = (obj: any) => {
+  return omitBy(obj, isNil);
 };

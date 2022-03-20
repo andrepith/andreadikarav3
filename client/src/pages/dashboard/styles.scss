@@ -6,7 +6,13 @@
   color: #eee;
 }
 
-.dashboard {
+.toggle_add {
+  font-size: 48px;
+  font-weight: 400;
+  color: $color-grey;
+}
+
+.bio {
   .form-group {
     display: grid;
     align-items: start;
@@ -140,11 +146,49 @@
         justify-content: center;
         align-items: center;
         cursor: pointer;
+      }
+    }
 
+    .experience-item {
+      form {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        .checkbox {
+          display: flex;
+          input {
+            width: 24px;
+            height: 24px;
+            margin: 0 8px 12px 0;
+            cursor: pointer;
+          }
+        }
+
+        .add-desc-button {
+          display: flex;
+          gap: 8px;
+          i {
+            font-size: 32px;
+            color: $color-black;
+          }
+          div {
+            margin: auto 0;
+          }
+        }
+      }
+
+      & .form-group:last-child {
+        display: flex;
+        flex-direction: row-reverse;
+      }
+
+      .desc-item {
+        display: flex;
+        gap: 8px;
         i {
-          font-size: 48px;
-          font-weight: 400;
-          color: $color-grey;
+          font-size: 38px;
+          color: var(--bs-danger);
         }
       }
     }

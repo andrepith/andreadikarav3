@@ -78,7 +78,7 @@ const BioForm = ({ bio }: any) => {
 
   return (
     <section>
-      <form className="container dashboard" onSubmit={onSubmit}>
+      <form className="container bio" onSubmit={onSubmit}>
         <div className="bio-section-title">Edit Bio</div>
         <div className="form-group">
           <label>First Name</label>
