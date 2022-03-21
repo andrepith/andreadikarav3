@@ -13,6 +13,7 @@ import {
   ADD_SKILLSET,
   DELETE_SKILLSET,
   UPDATE_SKILLSET,
+  ADD_PORTOFOLIO,
 } from "src/store/types";
 
 const bioError = (err: any) => (dispatch: any) => {
@@ -202,3 +203,20 @@ export const updateSkills =
       dispatch(bioError(err));
     }
   };
+
+export const addPortofolio = (formData: any) => async (dispatch: any) => {
+  try {
+    const config = {
+      headers: {
+        "Contect-Type": "application/json",
+      },
+    };
+    const res = await axios.put("api/bio/portofolio", formData, config);
+    dispatch({
+      type: ADD_PORTOFOLIO,
+      payload: res.data,
+    });
+  } catch (err: any) {
+    dispatch(bioError(err));
+  }
+};

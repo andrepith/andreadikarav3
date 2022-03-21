@@ -1,4 +1,6 @@
-import React from "react";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { addPortofolio } from "src/store/actions";
 
 interface portofolioInterface {
   _id: string;
@@ -9,7 +11,105 @@ interface portofolioInterface {
   type: string;
 }
 
+const initialState = {
+  url: "",
+  image: "",
+  alt: "",
+  name: "",
+  type: "",
+};
+
 const PortofolioForm = ({ bio }: any) => {
+  const dispatch = useDispatch();
+  const [toggle, setToggle] = useState({ open: false, id: "" });
+
+  const Form = ({ id = "", edit = false }: { id?: string; edit?: boolean }) => {
+    const [formData, setFormData] = useState(initialState);
+    const { url, image, alt, name, type } = formData;
+    const [disabled, setDisabled] = useState(false);
+    const onChange = (e: any) => {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+    const onAddSkill = async (e: any) => {
+      e.preventDefault();
+      await setDisabled(true);
+      await dispatch(addPortofolio(formData));
+      setDisabled(false);
+      setToggle({ ...toggle, open: false, id: "" });
+    };
+
+    return (
+      <form onSubmit={onAddSkill}>
+        <div className="form-group">
+          <input
+            type="text"
+            value={name}
+            onChange={onChange}
+            name="name"
+            placeholder="Name"
+            required
+          />
+        </div>
+        <div className="form-group">
+          <input
+            type="text"
+            value={url}
+            onChange={onChange}
+            name="url"
+            placeholder="URL"
+            required
+          />
+        </div>
+        <div className="form-group">
+          <input
+            type="text"
+            value={type}
+            onChange={onChange}
+            name="type"
+            placeholder="Type"
+            required
+          />
+        </div>
+        <div className="form-group">
+          <input
+            type="text"
+            value={image}
+            onChange={onChange}
+            name="image"
+            placeholder="Image src"
+            required
+          />
+        </div>
+        <div className="form-group">
+          <input
+            type="text"
+            value={alt}
+            onChange={onChange}
+            name="alt"
+            placeholder="Image alt"
+          />
+        </div>
+        <div className="form-group">
+          <button type="submit" className="btn btn-primary" disabled={disabled}>
+            {disabled
+              ? edit
+                ? "Updating"
+                : "Adding..."
+              : edit
+              ? "Update Portofolio"
+              : "Add Portofolio"}
+          </button>
+          <button
+            onClick={() => setToggle({ ...toggle, open: false, id: "" })}
+            className="btn btn-ghost"
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    );
+  };
+
   return (
     <section>
       <div className="portofolio container">
@@ -36,9 +136,20 @@ const PortofolioForm = ({ bio }: any) => {
             )
           )}
           <div className="portofolio-item__add">
-            <div className="portofolio-card">
-              <i className="fa fa-plus toggle_add" />
-            </div>
+            {toggle.open && !toggle.id ? (
+              <div className="portofolio-card">
+                <div className="portofolio-wrapper">
+                  <Form />
+                </div>
+              </div>
+            ) : (
+              <div
+                className="portofolio-card"
+                onClick={() => setToggle({ ...toggle, open: true, id: "" })}
+              >
+                <i className="fa fa-plus toggle_add" />
+              </div>
+            )}
           </div>
         </div>
       </div>

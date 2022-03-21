@@ -11,6 +11,7 @@ import {
   addSkills,
   deleteSkills,
   updateSkills,
+  addPortofolio,
 } from "./bio";
 
 export {
@@ -26,4 +27,5 @@ export {
   addSkills,
   deleteSkills,
   updateSkills,
+  addPortofolio,
 };
