@@ -76,3 +76,6 @@ export const htmlDateFormat = (timestamp: number) => {
 export const removeEmpty = (obj: any) => {
   return omitBy(obj, isNil);
 };
+
+export const htmlDateToUnix = (timestamp: number) =>
+  Math.floor(new Date(timestamp).getTime() / 1000) * 1000;

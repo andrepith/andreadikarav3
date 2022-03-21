@@ -127,3 +127,26 @@ export const deleteExperience = (expID: string) => async (dispatch: any) => {
     dispatch(bioError(err));
   }
 };
+
+export const updateExperience =
+  (formData: any, expID: string) => async (dispatch: any) => {
+    try {
+      const config = {
+        headers: {
+          "Contect-Type": "application/json",
+        },
+      };
+      const res = await axios.post(
+        `api/bio/experience/${expID}`,
+        formData,
+        config
+      );
+
+      dispatch({
+        type: UPDATE_EXPERIENCE,
+        payload: res.data,
+      });
+    } catch (err: any) {
+      dispatch(bioError(err));
+    }
+  };

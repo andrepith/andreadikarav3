@@ -1,8 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { sortBy, remove } from "lodash";
-import { addExperience, deleteExperience } from "src/store/actions";
-import { getRangeYear, removeEmpty } from "src/lib/Helpers";
+import {
+  addExperience,
+  deleteExperience,
+  updateExperience,
+} from "src/store/actions";
+import {
+  getRangeYear,
+  removeEmpty,
+  htmlDateToUnix,
+  htmlDateFormat,
+} from "src/lib/Helpers";
 
 interface expInterface {
   title: string;
@@ -31,7 +40,7 @@ const ExperienceForm = ({ bio }: any) => {
   const dispatch = useDispatch();
   const [toggle, setToggle] = useState({ open: false, id: "" });
 
-  const Form = () => {
+  const Form = ({ id = "", edit = false }: { id?: string; edit?: boolean }) => {
     const [formData, setFormData] = useState(initialState);
     const [descArr, setDescArr] = useState([""]);
     const [toDateDisabled, toggleDisabled] = useState(false);
@@ -44,22 +53,37 @@ const ExperienceForm = ({ bio }: any) => {
     const onAddExperience = async (e: any) => {
       e.preventDefault();
       await setDisabled(true);
-      await dispatch(
-        addExperience(
-          removeEmpty({
-            ...formData,
-            from: Math.floor(new Date(formData.from).getTime() / 1000) * 1000,
-            to: formData.current
-              ? null
-              : Math.floor(new Date(formData.to).getTime() / 1000) * 1000,
-            description: !!Object.keys(descArr).length
-              ? Object.values(descArr)
-              : null,
-          })
-        )
-      );
+      const sendData = await removeEmpty({
+        ...formData,
+        from: htmlDateToUnix(formData.from),
+        to: formData.current ? null : htmlDateToUnix(formData.to),
+        description: !!Object.keys(descArr).length
+          ? Object.values(descArr)
+          : null,
+      });
+      if (edit) {
+        await dispatch(updateExperience(sendData, id));
+      } else {
+        await dispatch(addExperience(sendData));
+      }
       setDisabled(false);
+      setToggle({ ...toggle, open: false, id: "" });
     };
+
+    useEffect(() => {
+      if (edit) {
+        const currentExp = bio.experience.filter(
+          (exp: { _id: string }) => exp._id === id
+        )[0];
+        setFormData({
+          ...currentExp,
+          from: htmlDateFormat(currentExp.from),
+          to: currentExp.current ? null : htmlDateFormat(currentExp.to),
+        });
+        setDescArr(currentExp.description);
+        toggleDisabled(currentExp.current);
+      }
+    }, [edit]);
 
     return (
       <form onSubmit={onAddExperience}>
@@ -167,7 +191,13 @@ const ExperienceForm = ({ bio }: any) => {
         </div>
         <div className="form-group">
           <button type="submit" className="btn btn-primary" disabled={disabled}>
-            {disabled ? "Adding..." : "Add Experience"}
+            {disabled
+              ? edit
+                ? "Updating"
+                : "Adding..."
+              : edit
+              ? "Update Experience"
+              : "Add Experience"}
           </button>
           <button
             onClick={() => setToggle({ ...toggle, open: false, id: "" })}
@@ -198,36 +228,49 @@ const ExperienceForm = ({ bio }: any) => {
               _id,
             }: expInterface) => (
               <div className="experience-item" key={_id}>
-                <div className="experience-card">
-                  <div className="experience-card__header">
-                    <h3>
-                      {title} @{" "}
-                      <a target="__blank" href={url}>
-                        {company}
-                      </a>
-                    </h3>
-                    <h4>{getRangeYear(from, to, current)}</h4>
-                    <h4>{location}</h4>
+                {toggle.open && toggle.id === _id ? (
+                  <div className="experience-card__add">
+                    <Form id={_id} edit={true} />
                   </div>
-                  <div className="experience-card__body">
-                    {description.map((desc, index) =>
-                      description.length > 1 ? (
-                        <li key={index}>{desc}</li>
-                      ) : (
-                        <p key={index}>{desc}</p>
-                      )
-                    )}
+                ) : (
+                  <div className="experience-card">
+                    <div className="experience-card__header">
+                      <h3>
+                        {title} @{" "}
+                        <a target="__blank" href={url}>
+                          {company}
+                        </a>
+                      </h3>
+                      <h4>{getRangeYear(from, to, current)}</h4>
+                      <h4>{location}</h4>
+                    </div>
+                    <div className="experience-card__body">
+                      {description.map((desc, index) =>
+                        description.length > 1 ? (
+                          <li key={index}>{desc}</li>
+                        ) : (
+                          <p key={index}>{desc}</p>
+                        )
+                      )}
+                    </div>
+                    <div className="experience-card__footer">
+                      <button
+                        className="btn-delete"
+                        onClick={() => dispatch(deleteExperience(_id))}
+                      >
+                        Delete
+                      </button>
+                      <button
+                        className="btn-edit"
+                        onClick={() =>
+                          setToggle({ ...toggle, open: true, id: _id })
+                        }
+                      >
+                        Edit
+                      </button>
+                    </div>
                   </div>
-                  <div className="experience-card__footer">
-                    <button
-                      className="btn-delete"
-                      onClick={() => dispatch(deleteExperience(_id))}
-                    >
-                      Delete
-                    </button>
-                    <button className="btn-edit">Edit</button>
-                  </div>
-                </div>
+                )}
               </div>
             )
           )}
