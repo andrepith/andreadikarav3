@@ -1,9 +1,7 @@
 const express = require("express");
-const request = require("request");
 const router = express.Router();
-const auth = require("../../middleware/auth");
 const { check, validationResult } = require("express-validator");
-
+const auth = require("../../middleware/auth");
 const Bio = require("../../models/Bio");
 
 // @route     GET api/bio

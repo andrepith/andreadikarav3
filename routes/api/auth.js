@@ -66,7 +66,7 @@ router.post(
       jwt.sign(
         payload,
         process.env.JWT_SECRET,
-        { expiresIn: 36000 },
+        { expiresIn: today.getTime() + 3600000 * 24 * 7 },
         (err, token) => {
           if (err) throw err;
           res.json({ token });
