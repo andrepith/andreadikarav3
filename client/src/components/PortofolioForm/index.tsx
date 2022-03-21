@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { addPortofolio, deletePortofolio } from "src/store/actions";
+import {
+  addPortofolio,
+  deletePortofolio,
+  updatePortofolio,
+} from "src/store/actions";
 
 interface portofolioInterface {
   _id: string;
@@ -33,10 +37,22 @@ const PortofolioForm = ({ bio }: any) => {
     const onAddSkill = async (e: any) => {
       e.preventDefault();
       await setDisabled(true);
-      await dispatch(addPortofolio(formData));
+      if (edit) {
+        await dispatch(updatePortofolio(formData, id));
+      } else {
+        await dispatch(addPortofolio(formData));
+      }
       setDisabled(false);
       setToggle({ ...toggle, open: false, id: "" });
     };
+
+    useEffect(() => {
+      if (edit) {
+        setFormData(
+          bio.portofolio.filter((item: { _id: string }) => item._id === id)[0]
+        );
+      }
+    }, [edit]);
 
     return (
       <form onSubmit={onAddSkill}>
@@ -119,21 +135,34 @@ const PortofolioForm = ({ bio }: any) => {
             ({ _id, url, image, name, type }: portofolioInterface) => (
               <div className="portofolio-item" key={_id}>
                 <div className="portofolio-card">
-                  <div>{name}</div>
-                  <div>{type}</div>
-                  <div className="btn-action">
-                    <a href={image} target="__blank">
-                      <i className="fa fa-image" />
-                    </a>
-                    <i className="fa fa-edit" />
-                    <i
-                      onClick={() => dispatch(deletePortofolio(_id))}
-                      className="fa fa-trash"
-                    />
-                    <a href={url} target="__blank">
-                      <i className="fa fa-arrow-right-from-bracket" />
-                    </a>
-                  </div>
+                  {toggle.open && toggle.id === _id ? (
+                    <div className="portofolio-wrapper">
+                      <Form id={_id} edit />
+                    </div>
+                  ) : (
+                    <>
+                      <div>{name}</div>
+                      <div>{type}</div>
+                      <div className="btn-action">
+                        <a href={image} target="__blank">
+                          <i className="fa fa-image" />
+                        </a>
+                        <i
+                          onClick={() =>
+                            setToggle({ ...toggle, open: true, id: _id })
+                          }
+                          className="fa fa-edit"
+                        />
+                        <i
+                          onClick={() => dispatch(deletePortofolio(_id))}
+                          className="fa fa-trash"
+                        />
+                        <a href={url} target="__blank">
+                          <i className="fa fa-arrow-right-from-bracket" />
+                        </a>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             )

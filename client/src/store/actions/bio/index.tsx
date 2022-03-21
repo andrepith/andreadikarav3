@@ -15,6 +15,7 @@ import {
   UPDATE_SKILLSET,
   ADD_PORTOFOLIO,
   DELETE_PORTOFOLIO,
+  UPDATE_PORTOFOLIO,
 } from "src/store/types";
 
 const bioError = (err: any) => (dispatch: any) => {
@@ -227,6 +228,29 @@ export const deletePortofolio =
     try {
       await axios.delete(`api/bio/portofolio/${portofolioID}`);
       dispatch({ type: DELETE_PORTOFOLIO, payload: portofolioID });
+    } catch (err: any) {
+      dispatch(bioError(err));
+    }
+  };
+
+export const updatePortofolio =
+  (formData: any, portofolioID: string) => async (dispatch: any) => {
+    try {
+      const config = {
+        headers: {
+          "Contect-Type": "application/json",
+        },
+      };
+      const res = await axios.post(
+        `api/bio/portofolio/${portofolioID}`,
+        formData,
+        config
+      );
+
+      dispatch({
+        type: UPDATE_PORTOFOLIO,
+        payload: res.data,
+      });
     } catch (err: any) {
       dispatch(bioError(err));
     }
