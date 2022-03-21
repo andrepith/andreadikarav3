@@ -10,6 +10,7 @@ import {
   ADD_EXPERIENCE,
   DELETE_EXPERIENCE,
   UPDATE_EXPERIENCE,
+  ADD_SKILLSET,
 } from "src/store/types";
 
 const bioError = (err: any) => (dispatch: any) => {
@@ -150,3 +151,20 @@ export const updateExperience =
       dispatch(bioError(err));
     }
   };
+
+export const addSkills = (formData: any) => async (dispatch: any) => {
+  try {
+    const config = {
+      headers: {
+        "Contect-Type": "application/json",
+      },
+    };
+    const res = await axios.put("api/bio/skillset", formData, config);
+    dispatch({
+      type: ADD_SKILLSET,
+      payload: res.data,
+    });
+  } catch (err: any) {
+    dispatch(bioError(err));
+  }
+};
