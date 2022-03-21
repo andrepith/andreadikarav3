@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { addSkills, deleteSkills } from "src/store/actions";
+import { addSkills, deleteSkills, updateSkills } from "src/store/actions";
 
 interface skillInterface {
   _id: string;
@@ -14,7 +14,7 @@ const SkillForm = ({ bio }: any) => {
   const dispatch = useDispatch();
   const [toggle, setToggle] = useState({ open: false, id: "" });
 
-  const Form = () => {
+  const Form = ({ id = "", edit = false }: { id?: string; edit?: boolean }) => {
     const [formData, setFormData] = useState({ name: "", image: "", link: "" });
     const { name, image, link } = formData;
     const [disabled, setDisabled] = useState(false);
@@ -24,10 +24,23 @@ const SkillForm = ({ bio }: any) => {
     const onAddSkill = async (e: any) => {
       e.preventDefault();
       await setDisabled(true);
-      await dispatch(addSkills(formData));
+      if (edit) {
+        await dispatch(updateSkills(formData, id));
+      } else {
+        await dispatch(addSkills(formData));
+      }
       setDisabled(false);
       setToggle({ ...toggle, open: false, id: "" });
     };
+
+    useEffect(() => {
+      if (edit) {
+        setFormData(
+          bio.skillset.filter((soc: { _id: string }) => soc._id === id)[0]
+        );
+      }
+    }, [edit]);
+
     return (
       <form onSubmit={onAddSkill}>
         <div className="form-group">
@@ -62,7 +75,13 @@ const SkillForm = ({ bio }: any) => {
         </div>
         <div className="form-group">
           <button type="submit" className="btn btn-primary" disabled={disabled}>
-            {disabled ? "Adding..." : "Add Skill"}
+            {disabled
+              ? edit
+                ? "Updating"
+                : "Adding..."
+              : edit
+              ? "Update Skills"
+              : "Add Skills"}
           </button>
           <button
             onClick={() => setToggle({ ...toggle, open: false, id: "" })}
@@ -82,19 +101,32 @@ const SkillForm = ({ bio }: any) => {
           {bio.skillset.map(({ _id, name, image, link }: skillInterface) => (
             <div className="skillform__item" key={_id}>
               <div className="skillform-card">
-                <div className="skillform__image">
-                  <Image src={image} alt={`${name}-image`} layout="fill" />
-                </div>
-                <div className="btn-action">
-                  <i className="fa fa-edit" />
-                  <i
-                    onClick={() => dispatch(deleteSkills(_id))}
-                    className="fa fa-trash"
-                  />
-                  <a href={link} target="__blank">
-                    <i className="fa fa-arrow-right-from-bracket" />
-                  </a>
-                </div>
+                {toggle.open && toggle.id === _id ? (
+                  <div className="skillform-wrapper">
+                    <Form id={_id} edit />
+                  </div>
+                ) : (
+                  <>
+                    <div className="skillform__image">
+                      <Image src={image} alt={`${name}-image`} layout="fill" />
+                    </div>
+                    <div className="btn-action">
+                      <i
+                        onClick={() =>
+                          setToggle({ ...toggle, open: true, id: _id })
+                        }
+                        className="fa fa-edit"
+                      />
+                      <i
+                        onClick={() => dispatch(deleteSkills(_id))}
+                        className="fa fa-trash"
+                      />
+                      <a href={link} target="__blank">
+                        <i className="fa fa-arrow-right-from-bracket" />
+                      </a>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           ))}

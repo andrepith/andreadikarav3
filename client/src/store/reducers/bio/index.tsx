@@ -10,6 +10,7 @@ import {
   UPDATE_EXPERIENCE,
   ADD_SKILLSET,
   DELETE_SKILLSET,
+  UPDATE_SKILLSET,
 } from "src/store/types";
 
 const initialState = {
@@ -29,6 +30,7 @@ const bio = (
     case ADD_EXPERIENCE:
     case UPDATE_EXPERIENCE:
     case ADD_SKILLSET:
+    case UPDATE_SKILLSET:
       return { ...state, bio: payload };
     case DELETE_SOCIAL:
       return {

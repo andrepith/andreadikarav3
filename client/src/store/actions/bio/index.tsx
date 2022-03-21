@@ -12,6 +12,7 @@ import {
   UPDATE_EXPERIENCE,
   ADD_SKILLSET,
   DELETE_SKILLSET,
+  UPDATE_SKILLSET,
 } from "src/store/types";
 
 const bioError = (err: any) => (dispatch: any) => {
@@ -178,3 +179,26 @@ export const deleteSkills = (skillID: string) => async (dispatch: any) => {
     dispatch(bioError(err));
   }
 };
+
+export const updateSkills =
+  (formData: any, expID: string) => async (dispatch: any) => {
+    try {
+      const config = {
+        headers: {
+          "Contect-Type": "application/json",
+        },
+      };
+      const res = await axios.post(
+        `api/bio/skillset/${expID}`,
+        formData,
+        config
+      );
+
+      dispatch({
+        type: UPDATE_SKILLSET,
+        payload: res.data,
+      });
+    } catch (err: any) {
+      dispatch(bioError(err));
+    }
+  };
