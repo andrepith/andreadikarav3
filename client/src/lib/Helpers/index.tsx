@@ -19,26 +19,27 @@ export const getRangeYear = (
   const secondDate = new Date(secondTimestamp);
   const firstYear = getYear(firstTimestamp);
   const secondYear = getYear(secondTimestamp);
+  console.log(monthConverter(secondDate.getMonth()));
   if (current) {
     return (
-      monthConverter(firstDate.getMonth() + 1) + " " + firstYear + " - Present"
+      monthConverter(firstDate.getMonth()) + " " + firstYear + " - Present"
     );
   }
   if (firstYear === secondYear) {
     return (
-      monthConverter(firstDate.getMonth() + 1) +
+      monthConverter(firstDate.getMonth()) +
       " - " +
-      monthConverter(secondDate.getMonth() + 1) +
+      monthConverter(secondDate.getMonth()) +
       " " +
       firstYear
     );
   }
   return (
-    monthConverter(firstDate.getMonth() + 1) +
+    monthConverter(firstDate.getMonth()) +
     " " +
     firstYear +
     " - " +
-    monthConverter(secondDate.getMonth() + 1) +
+    monthConverter(secondDate.getMonth()) +
     " " +
     secondYear
   );

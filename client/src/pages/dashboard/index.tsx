@@ -7,6 +7,7 @@ import SocialForm from "@/components/SocialForm";
 import ExperienceForm from "@/components/ExperienceForm";
 import SkillForm from "@/components/SkillForm";
 import PortofolioForm from "@/components/PortofolioForm";
+import EducationForm from "@/components/EducationForm";
 import { getBio } from "src/store/actions";
 
 const Dashboard = () => {
@@ -26,6 +27,7 @@ const Dashboard = () => {
           <ExperienceForm bio={bio} />
           <PortofolioForm bio={bio} />
           <SkillForm bio={bio} />
+          <EducationForm bio={bio} />
         </>
       )}
     </div>
