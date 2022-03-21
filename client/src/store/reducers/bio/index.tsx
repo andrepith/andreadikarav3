@@ -12,6 +12,7 @@ import {
   DELETE_SKILLSET,
   UPDATE_SKILLSET,
   ADD_PORTOFOLIO,
+  DELETE_PORTOFOLIO,
 } from "src/store/types";
 
 const initialState = {
@@ -67,6 +68,18 @@ const bio = (
           // @ts-expect-error
           skillset: state.bio.skillset.filter(
             (skill: { _id: string }) => skill._id !== payload
+          ),
+        },
+      };
+    case DELETE_PORTOFOLIO:
+      return {
+        ...state,
+        bio: {
+          // @ts-expect-error
+          ...state.bio,
+          // @ts-expect-error
+          portofolio: state.bio.portofolio.filter(
+            (item: { _id: string }) => item._id !== payload
           ),
         },
       };

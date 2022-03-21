@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { addPortofolio } from "src/store/actions";
+import { addPortofolio, deletePortofolio } from "src/store/actions";
 
 interface portofolioInterface {
   _id: string;
@@ -126,7 +126,10 @@ const PortofolioForm = ({ bio }: any) => {
                       <i className="fa fa-image" />
                     </a>
                     <i className="fa fa-edit" />
-                    <i className="fa fa-trash" />
+                    <i
+                      onClick={() => dispatch(deletePortofolio(_id))}
+                      className="fa fa-trash"
+                    />
                     <a href={url} target="__blank">
                       <i className="fa fa-arrow-right-from-bracket" />
                     </a>
