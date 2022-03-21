@@ -8,10 +8,11 @@ import {
 } from "../../types";
 
 // Login
-export const loadUser = () => (dispatch: any) => {
+export const loadUser = () => async (dispatch: any) => {
   if (typeof window !== "undefined" && localStorage.token) {
     setAuthToken(localStorage.token);
     try {
+      await axios.get("/api/auth");
       dispatch({ type: USER_LOADED });
     } catch (err) {
       dispatch({
