@@ -44,7 +44,7 @@ const bio = (
           // @ts-expect-error
           ...state.bio,
           // @ts-expect-error
-          social: state.bio.experience.filter(
+          experience: state.bio.experience.filter(
             (exp: { _id: string }) => exp._id !== payload
           ),
         },

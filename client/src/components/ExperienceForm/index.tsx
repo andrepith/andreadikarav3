@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { sortBy, remove } from "lodash";
 import { addExperience, deleteExperience } from "src/store/actions";
 import { getRangeYear, removeEmpty } from "src/lib/Helpers";
 
@@ -32,7 +33,7 @@ const ExperienceForm = ({ bio }: any) => {
 
   const Form = () => {
     const [formData, setFormData] = useState(initialState);
-    const [descArr, setDescArr] = useState({ 0: "" });
+    const [descArr, setDescArr] = useState([""]);
     const [toDateDisabled, toggleDisabled] = useState(false);
     const [disabled, setDisabled] = useState(false);
     const { title, company, location, from, to, current, url } = formData;
@@ -134,18 +135,21 @@ const ExperienceForm = ({ bio }: any) => {
         </div>
         <label>Work done</label>
         <div className="form-group">
-          {Object.values(descArr).map((desc, key) => (
+          {descArr.map((desc: string, key: number) => (
             <div key={key} className="desc-item">
               <input
                 value={desc}
-                onChange={(e) =>
-                  setDescArr({ ...descArr, [key]: e.target.value })
-                }
+                onChange={(e) => {
+                  const temp = descArr.slice();
+                  temp[key] = e.target.value;
+                  setDescArr(temp);
+                }}
               />
               <i
                 onClick={() =>
-                  // @ts-ignore
-                  setDescArr(removeEmpty({ ...descArr, [key]: null }))
+                  setDescArr(
+                    remove([...descArr], (item) => item !== descArr[key])
+                  )
                 }
                 className="fa fa-square-minus"
               />
@@ -155,9 +159,7 @@ const ExperienceForm = ({ bio }: any) => {
         <div className="form-group">
           <div className="add-desc-button">
             <i
-              onClick={() =>
-                setDescArr({ ...descArr, [Object.keys(descArr).length]: "" })
-              }
+              onClick={() => setDescArr([...descArr, ""])}
               className="fa fa-square-plus"
             />
             <div>Add more work</div>
@@ -183,7 +185,7 @@ const ExperienceForm = ({ bio }: any) => {
       <div className="experience container">
         <div className="bio-section-title">Experience</div>
         <div className="experience-items">
-          {bio.experience.map(
+          {sortBy(bio.experience, ["from"]).map(
             ({
               title,
               company,
