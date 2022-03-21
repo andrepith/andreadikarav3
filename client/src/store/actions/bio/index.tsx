@@ -17,6 +17,7 @@ import {
   DELETE_PORTOFOLIO,
   UPDATE_PORTOFOLIO,
   ADD_EDUCATION,
+  DELETE_EDUCATION,
 } from "src/store/types";
 
 const bioError = (err: any) => (dispatch: any) => {
@@ -269,6 +270,15 @@ export const addEducation = (formData: any) => async (dispatch: any) => {
       type: ADD_EDUCATION,
       payload: res.data,
     });
+  } catch (err: any) {
+    dispatch(bioError(err));
+  }
+};
+
+export const deleteEducation = (eduID: string) => async (dispatch: any) => {
+  try {
+    await axios.delete(`api/bio/education/${eduID}`);
+    dispatch({ type: DELETE_EDUCATION, payload: eduID });
   } catch (err: any) {
     dispatch(bioError(err));
   }

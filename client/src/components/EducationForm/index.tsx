@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getRangeYear, htmlDateToUnix, htmlDateFormat } from "src/lib/Helpers";
-import { addEducation } from "src/store/actions";
+import { addEducation, deleteEducation } from "src/store/actions";
 
 interface eduInterface {
   _id: string;
@@ -164,7 +164,10 @@ const EducationForm = ({ bio }: any) => {
                         }
                         className="fa fa-edit"
                       />
-                      <i className="fa fa-trash" />
+                      <i
+                        onClick={() => dispatch(deleteEducation(_id))}
+                        className="fa fa-trash"
+                      />
                     </div>
                   </div>
                 </div>

@@ -15,6 +15,7 @@ import {
   DELETE_PORTOFOLIO,
   UPDATE_PORTOFOLIO,
   ADD_EDUCATION,
+  DELETE_EDUCATION,
 } from "src/store/types";
 
 const initialState = {
@@ -84,6 +85,18 @@ const bio = (
           // @ts-expect-error
           portofolio: state.bio.portofolio.filter(
             (item: { _id: string }) => item._id !== payload
+          ),
+        },
+      };
+    case DELETE_EDUCATION:
+      return {
+        ...state,
+        bio: {
+          // @ts-expect-error
+          ...state.bio,
+          // @ts-expect-error
+          education: state.bio.education.filter(
+            (edu: { _id: string }) => edu._id !== payload
           ),
         },
       };
