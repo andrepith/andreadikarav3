@@ -6,6 +6,7 @@ import BioForm from "@/components/BioForm";
 import SocialForm from "@/components/SocialForm";
 import ExperienceForm from "@/components/ExperienceForm";
 import SkillForm from "@/components/SkillForm";
+import PortofolioForm from "@/components/PortofolioForm";
 import { getBio } from "src/store/actions";
 
 const Dashboard = () => {
@@ -23,6 +24,7 @@ const Dashboard = () => {
           <BioForm bio={bio} />
           <SocialForm bio={bio} />
           <ExperienceForm bio={bio} />
+          <PortofolioForm bio={bio} />
           <SkillForm bio={bio} />
         </>
       )}
