@@ -16,6 +16,7 @@ import {
   ADD_PORTOFOLIO,
   DELETE_PORTOFOLIO,
   UPDATE_PORTOFOLIO,
+  ADD_EDUCATION,
 } from "src/store/types";
 
 const bioError = (err: any) => (dispatch: any) => {
@@ -255,3 +256,20 @@ export const updatePortofolio =
       dispatch(bioError(err));
     }
   };
+
+export const addEducation = (formData: any) => async (dispatch: any) => {
+  try {
+    const config = {
+      headers: {
+        "Contect-Type": "application/json",
+      },
+    };
+    const res = await axios.put("api/bio/education", formData, config);
+    dispatch({
+      type: ADD_EDUCATION,
+      payload: res.data,
+    });
+  } catch (err: any) {
+    dispatch(bioError(err));
+  }
+};

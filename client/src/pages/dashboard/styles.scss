@@ -314,7 +314,7 @@
 
   .education-item {
     &__add {
-      width: 200px;
+      width: 260px;
       .education-card {
         display: flex;
         justify-content: center;
@@ -340,6 +340,17 @@
       & > * {
         color: $color-black;
         cursor: pointer;
+      }
+    }
+
+    .form-group {
+      textarea {
+        width: 100%;
+      }
+      &:last-child {
+        margin-top: 24px;
+        display: flex;
+        flex-direction: row-reverse;
       }
     }
   }

@@ -14,6 +14,7 @@ import {
   addPortofolio,
   deletePortofolio,
   updatePortofolio,
+  addEducation,
 } from "./bio";
 
 export {
@@ -32,4 +33,5 @@ export {
   addPortofolio,
   deletePortofolio,
   updatePortofolio,
+  addEducation,
 };
