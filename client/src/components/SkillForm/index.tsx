@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addSkills } from "src/store/actions";
+import { addSkills, deleteSkills } from "src/store/actions";
 
 interface skillInterface {
   _id: string;
@@ -87,7 +87,10 @@ const SkillForm = ({ bio }: any) => {
                 </div>
                 <div className="btn-action">
                   <i className="fa fa-edit" />
-                  <i className="fa fa-trash" />
+                  <i
+                    onClick={() => dispatch(deleteSkills(_id))}
+                    className="fa fa-trash"
+                  />
                   <a href={link} target="__blank">
                     <i className="fa fa-arrow-right-from-bracket" />
                   </a>

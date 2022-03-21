@@ -11,6 +11,7 @@ import {
   DELETE_EXPERIENCE,
   UPDATE_EXPERIENCE,
   ADD_SKILLSET,
+  DELETE_SKILLSET,
 } from "src/store/types";
 
 const bioError = (err: any) => (dispatch: any) => {
@@ -164,6 +165,15 @@ export const addSkills = (formData: any) => async (dispatch: any) => {
       type: ADD_SKILLSET,
       payload: res.data,
     });
+  } catch (err: any) {
+    dispatch(bioError(err));
+  }
+};
+
+export const deleteSkills = (skillID: string) => async (dispatch: any) => {
+  try {
+    await axios.delete(`api/bio/skillset/${skillID}`);
+    dispatch({ type: DELETE_SKILLSET, payload: skillID });
   } catch (err: any) {
     dispatch(bioError(err));
   }

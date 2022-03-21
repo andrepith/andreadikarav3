@@ -9,6 +9,7 @@ import {
   DELETE_EXPERIENCE,
   UPDATE_EXPERIENCE,
   ADD_SKILLSET,
+  DELETE_SKILLSET,
 } from "src/store/types";
 
 const initialState = {
@@ -50,6 +51,18 @@ const bio = (
           // @ts-expect-error
           experience: state.bio.experience.filter(
             (exp: { _id: string }) => exp._id !== payload
+          ),
+        },
+      };
+    case DELETE_SKILLSET:
+      return {
+        ...state,
+        bio: {
+          // @ts-expect-error
+          ...state.bio,
+          // @ts-expect-error
+          skillset: state.bio.skillset.filter(
+            (skill: { _id: string }) => skill._id !== payload
           ),
         },
       };

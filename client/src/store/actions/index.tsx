@@ -9,6 +9,7 @@ import {
   deleteExperience,
   updateExperience,
   addSkills,
+  deleteSkills,
 } from "./bio";
 
 export {
@@ -22,4 +23,5 @@ export {
   deleteExperience,
   updateExperience,
   addSkills,
+  deleteSkills,
 };
