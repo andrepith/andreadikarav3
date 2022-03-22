@@ -2,13 +2,9 @@ import { useState } from "react";
 import Link from "next/link";
 import { List } from "react-bootstrap-icons";
 import Overlay from "../Overlay";
+import bioInterface from "@/lib/Types";
 
-interface NavBarInterface {
-  firstName: string;
-  lastName: string;
-  github: string;
-  linkedin: string;
-  email: string;
+interface NavBarInterface extends bioInterface {
   scrollToExperience: () => void;
   scrollToProject: () => void;
   scrollToSkills: () => void;
@@ -16,11 +12,7 @@ interface NavBarInterface {
 }
 
 const NavBar = ({
-  firstName,
-  lastName,
-  github,
-  linkedin,
-  email,
+  bio: { firstName, lastName, email },
   scrollToExperience,
   scrollToProject,
   scrollToSkills,

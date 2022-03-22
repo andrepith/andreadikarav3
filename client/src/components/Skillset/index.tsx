@@ -1,22 +1,13 @@
 import Image from "next/image";
+import bioInterface from "@/lib/Types";
 
-interface SkillsetInterfaceItem {
-  name: string;
-  image: string;
-  link: string;
-}
-
-interface SkillsetInterface {
-  skillset: Array<SkillsetInterfaceItem>;
-}
-
-const Skillset = ({ skillset }: SkillsetInterface) => {
+const Skillset = ({ bio }: bioInterface) => {
   return (
     <section className="justify-content-start skillset" id="skills">
       <div className="container">
         <h2 className="section-title text-center">Featured Skillset.</h2>
         <div className="logo-container mt-4">
-          {skillset.map((item, key) => (
+          {bio.skillset.map((item, key) => (
             <div className="logo-wrapper" key={key}>
               <Image
                 src={item.image}

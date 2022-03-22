@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-// import { getData } from "./api/bio";
 import NavBar from "src/components/NavBar";
 import LandingTop from "src/components/LandingTop";
 import Experience from "src/components/Experience";
@@ -7,27 +6,7 @@ const Showcase = dynamic(() => import("@/components/Showcase"));
 const Skillset = dynamic(() => import("@/components/Skillset"));
 const Contact = dynamic(() => import("@/components/Contact"));
 const Footer = dynamic(() => import("@/components/Footer"));
-
-interface HomeProps {
-  bio: {
-    firstName: string;
-    lastName: string;
-    nationality: string;
-    aboutMe: string;
-    email: string;
-    phone: string;
-    github: {
-      url: string;
-    };
-    linkedin: {
-      url: string;
-    };
-    experience: Array<any>;
-    resumeLink: string;
-    portofolio: Array<any>;
-    skillset: Array<any>;
-  };
-}
+import bioInterface from "@/lib/Types";
 
 export async function getServerSideProps({ req }: { req: any }) {
   const protocol = req.headers["x-forwarded-proto"] || "http";
@@ -41,7 +20,7 @@ export async function getServerSideProps({ req }: { req: any }) {
   };
 }
 
-const Home = ({ bio }: HomeProps) => {
+const Home = ({ bio }: bioInterface) => {
   const scrollToExperience = () => {
     window.location.replace("/#experience");
   };
@@ -58,30 +37,19 @@ const Home = ({ bio }: HomeProps) => {
   return (
     <>
       <NavBar
-        firstName={bio.firstName}
-        lastName={bio.lastName}
-        github={bio.github.url}
-        linkedin={bio.linkedin.url}
-        email={bio.email}
+        bio={bio}
         scrollToExperience={scrollToExperience}
         scrollToProject={scrollToProject}
         scrollToSkills={scrollToSkills}
         scrollToContact={scrollToContact}
       />
       <main className="wrapper">
-        <LandingTop
-          firstName={bio.firstName}
-          nationality={bio.nationality}
-          aboutMe={bio.aboutMe}
-          email={bio.email}
-          resumeLink={bio.resumeLink}
-          scrollToExperience={scrollToExperience}
-        />
-        <Experience experience={bio.experience} />
-        <Showcase portofolio={bio.portofolio} />
-        <Skillset skillset={bio.skillset} />
+        <LandingTop bio={bio} scrollToExperience={scrollToExperience} />
+        <Experience bio={bio} />
+        <Showcase bio={bio} />
+        <Skillset bio={bio} />
         <Contact />
-        <Footer email={bio.email} phone={bio.phone} />
+        <Footer bio={bio} />
       </main>
     </>
   );

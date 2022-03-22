@@ -1,11 +1,7 @@
 import { EnvelopeFill, PhoneFill } from "react-bootstrap-icons";
+import bioInterface from "@/lib/Types";
 
-interface FooterInterface {
-  email: string;
-  phone: string;
-}
-
-const Footer = (props: FooterInterface) => {
+const Footer = ({ bio }: bioInterface) => {
   return (
     <footer className="justify-content-start footer" id="footer">
       <div className="container">
@@ -13,11 +9,11 @@ const Footer = (props: FooterInterface) => {
           <div className="footer-contact">
             <div className="footer-contact__email">
               <EnvelopeFill className="me-2" size={16} />
-              <span>{props.email}</span>
+              <span>{bio.email}</span>
             </div>
             <div className="footer-contact__phone">
               <PhoneFill className="me-2" size={16} />
-              <span>{props.phone}</span>
+              <span>{bio.phone}</span>
             </div>
           </div>
           <div className="footer-copyright">

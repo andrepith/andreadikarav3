@@ -4,22 +4,14 @@ import {
   FileArrowDownFill,
   ArrowDownCircleFill,
 } from "react-bootstrap-icons";
+import bioInterface from "@/lib/Types";
 
-interface LandingTopProps {
-  firstName: string;
-  nationality: string;
-  aboutMe: string;
-  email: string;
-  resumeLink: string;
+interface LandingTopProps extends bioInterface {
   scrollToExperience: () => void;
 }
 
 const LandingTop = ({
-  firstName,
-  nationality,
-  aboutMe,
-  email,
-  resumeLink,
+  bio: { firstName, nationality, aboutMe, email, resumeLink },
   scrollToExperience,
 }: LandingTopProps) => {
   return (

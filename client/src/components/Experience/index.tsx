@@ -3,24 +3,10 @@ import {
   VerticalTimeline,
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
-import { getRangeYear } from "../../lib/Helpers";
+import { getRangeYear } from "src/lib/Helpers";
+import bioInterface from "@/lib/Types";
 
-interface ExperienceInterfaceItem {
-  title: string;
-  company: string;
-  location: string;
-  from: string;
-  to: string;
-  current: boolean;
-  description: string[];
-  url: string;
-}
-
-interface ExperienceInterface {
-  experience: Array<ExperienceInterfaceItem>;
-}
-
-const Experience = (props: ExperienceInterface) => {
+const Experience = ({ bio }: bioInterface) => {
   return (
     <section className="justify-content-start experience" id="experience">
       <div className="container">
@@ -28,7 +14,7 @@ const Experience = (props: ExperienceInterface) => {
         <section className="timeline">
           <div className="timeline-container">
             <VerticalTimeline>
-              {props.experience.map((item, index) => (
+              {bio.experience.map((item, index) => (
                 <VerticalTimelineElement
                   className="vertical-timeline-element--work"
                   date={getRangeYear(item.from, item.to)}
