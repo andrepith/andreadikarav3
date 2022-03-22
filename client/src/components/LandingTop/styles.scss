@@ -5,25 +5,70 @@
   margin: auto;
   display: grid;
   grid-template-areas:
-    "head"
-    "body"
-    "foot";
-}
+    "a a a"
+    "b b d"
+    "b b d"
+    "c c c";
 
-.landing-top__text {
-  grid-area: body;
-  align-self: center;
-}
+  &__text {
+    grid-area: b;
+    align-self: center;
+    display: flex;
+    justify-content: center;
+  }
 
-.landing-top__foot {
-  grid-area: foot;
-  align-self: center;
-  justify-self: center;
-  border-radius: 50%;
-  box-shadow: 0 0 0 0 $color-black;
-  cursor: pointer;
-  transform: scale(1);
-  animation: pulse-black 2s infinite;
+  &__foot {
+    grid-area: c;
+    align-self: center;
+    justify-self: center;
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 $color-black;
+    cursor: pointer;
+    transform: scale(1);
+    animation: pulse-black 2s infinite;
+  }
+
+  &__side {
+    grid-area: d;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    gap: 20px;
+
+    @include for-desktop-down {
+      display: none;
+    }
+
+    a {
+      color: $color-white;
+      i {
+        font-size: 34px;
+        display: inline-block;
+        text-decoration: none;
+        text-decoration-skip-ink: auto;
+        color: inherit;
+        position: relative;
+        transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+        &:hover {
+          transform: translateY(-3px);
+          color: $color-highlight;
+        }
+      }
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      display: block;
+      width: 1px;
+      height: 90px;
+      margin: 0px auto;
+      background-color: $color-white;
+    }
+  }
 }
 
 @keyframes pulse-black {

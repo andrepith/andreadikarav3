@@ -11,7 +11,7 @@ interface LandingTopProps extends bioInterface {
 }
 
 const LandingTop = ({
-  bio: { firstName, nationality, aboutMe, email, resumeLink },
+  bio: { firstName, nationality, aboutMe, email, resumeLink, social },
   scrollToExperience,
 }: LandingTopProps) => {
   return (
@@ -48,6 +48,16 @@ const LandingTop = ({
       <div className="landing-top__foot" onClick={scrollToExperience}>
         <ArrowDownCircleFill size={32} color="white" />
       </div>
+      <ul className="landing-top__side">
+        {social.map(({ name, url }, key) => (
+          <li key={key}>
+            <a href={url} target="__blank">
+              <i className={`fa fa-${name.toLocaleLowerCase()}`} />
+            </a>
+          </li>
+        ))}
+        {/* <i className="fa fa-github" /> */}
+      </ul>
     </section>
   );
 };

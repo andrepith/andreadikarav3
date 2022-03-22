@@ -11,11 +11,24 @@
   display: flex;
   justify-content: space-between;
 
+  &__socials {
+    display: none;
+    @include for-desktop-down {
+      display: flex;
+      gap: 14px;
+      margin-top: 8px;
+
+      a {
+        color: $color-white;
+      }
+    }
+  }
+
   @include for-tablet-portrait-down {
     display: block;
 
     .footer-copyright {
-      margin-top: 24px;
+      margin-top: 14px;
     }
   }
 }

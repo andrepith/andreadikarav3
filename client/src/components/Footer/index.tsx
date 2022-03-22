@@ -16,6 +16,15 @@ const Footer = ({ bio }: bioInterface) => {
               <span>{bio.phone}</span>
             </div>
           </div>
+          <div className="footer-content__socials">
+            {bio.social.map(({ name, url }, key) => (
+              <div key={key}>
+                <a href={url} target="__blank">
+                  <i className={`fa fa-${name.toLocaleLowerCase()}`} />
+                </a>
+              </div>
+            ))}
+          </div>
           <div className="footer-copyright">
             <div>Designed and Built by Andre Adikara</div>
             <div>© 2021-{new Date().getFullYear()}</div>
