@@ -30,27 +30,25 @@
 
 .social-items {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(8, 1fr);
   gap: 20px;
 }
 
 .social-item {
   position: relative;
   padding: 8px;
-  background: white;
+  background: $color-white;
   border-radius: 4px;
 
-  .add-social-button {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-
-    i {
-      font-size: 48px;
-      font-weight: 400;
-      color: $color-grey;
+  &__add {
+    .add-social-button {
+      background: $color-white;
+      border-radius: 4px;
+      height: 64px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
     }
   }
 
@@ -71,22 +69,17 @@
   }
 
   .btn-action {
-    margin-top: 12px;
     display: flex;
-    gap: 10px;
+    gap: 4px;
+    justify-content: flex-end;
 
-    button {
-      border-radius: 4px;
+    & > * {
+      color: $color-black;
       cursor: pointer;
-
-      a {
-        text-decoration: none;
-        color: $color-black;
-        &:hover {
-          text-decoration: none;
-          color: $color-black;
-        }
-      }
+      margin: auto 0;
+    }
+    a:hover {
+      color: $color-black;
     }
   }
 }
@@ -243,7 +236,8 @@
   &__image {
     position: relative;
     width: 48px;
-    height: 48px;
+    height: auto;
+    flex: 1;
   }
 
   .form-group {
@@ -265,13 +259,14 @@
 
     .portofolio-item {
       &__add {
-        background-color: $color-white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 4px;
-        cursor: pointer;
-        width: 200px;
+        .portofolio-card {
+          height: 88px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 4px;
+          cursor: pointer;
+        }
       }
     }
 
@@ -308,7 +303,7 @@
 
   .education-items {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
   }
 
@@ -323,19 +318,25 @@
         cursor: pointer;
       }
     }
+    &__last {
+      height: 136px;
+    }
   }
 
   .education-card {
+    border-radius: 4px;
+    height: 100%;
     background-color: $color-white;
     padding: 8px;
-    border-radius: 4px;
-    display: flex;
-    justify-content: space-between;
-    height: 100%;
+
+    .education-wrapper {
+      display: flex;
+    }
 
     .btn-action {
       display: flex;
       gap: 4px;
+      flex-direction: column;
 
       & > * {
         color: $color-black;

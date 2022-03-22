@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getRangeYear, htmlDateToUnix, htmlDateFormat } from "src/lib/Helpers";
-import { addEducation, deleteEducation } from "src/store/actions";
+import {
+  addEducation,
+  deleteEducation,
+  updateEducation,
+} from "src/store/actions";
 
 interface eduInterface {
   _id: string;
@@ -30,7 +34,6 @@ const EducationForm = ({ bio }: any) => {
     const [formData, setFormData] = useState(initialState);
     const { school, degree, fieldofstudy, from, to, description } = formData;
     const [disabled, setDisabled] = useState(false);
-    const [toDateDisabled, toggleDisabled] = useState(false);
     const onChange = (e: any) => {
       setFormData({ ...formData, [e.target.name]: e.target.value });
     };
@@ -38,16 +41,33 @@ const EducationForm = ({ bio }: any) => {
     const onAddEducation = async (e: any) => {
       e.preventDefault();
       await setDisabled(true);
-      dispatch(
-        addEducation({
-          ...formData,
-          from: htmlDateToUnix(formData.from),
-          to: htmlDateToUnix(formData.to),
-        })
-      );
+      const sendData = await {
+        ...formData,
+        from: htmlDateToUnix(formData.from),
+        to: htmlDateToUnix(formData.to),
+      };
+      if (edit) {
+        await dispatch(updateEducation(sendData, id));
+      } else {
+        await dispatch(addEducation(sendData));
+      }
       setDisabled(false);
       setToggle({ ...toggle, open: false, id: "" });
     };
+
+    useEffect(() => {
+      if (edit) {
+        const currentEdu = bio.education.filter(
+          (exp: { _id: string }) => exp._id === id
+        )[0];
+
+        setFormData({
+          ...currentEdu,
+          from: htmlDateFormat(currentEdu.from),
+          to: htmlDateFormat(currentEdu.to),
+        });
+      }
+    }, []);
 
     return (
       <form onSubmit={onAddEducation}>
@@ -98,7 +118,6 @@ const EducationForm = ({ bio }: any) => {
             onChange={onChange}
             name="to"
             placeholder="End Date"
-            disabled={toDateDisabled}
           />
         </div>
         <div className="form-group">
@@ -146,30 +165,38 @@ const EducationForm = ({ bio }: any) => {
               to,
               description,
             }: eduInterface) => (
-              <div className="education-item" key={_id}>
-                <div className="education-wrapper">
-                  <div className="education-card">
-                    <div className="education-detail">
-                      <div>{school}</div>
-                      <div>
-                        {degree} in {fieldofstudy}
+              <div key={_id}>
+                <div className="education-item">
+                  {toggle.open && toggle.id === _id ? (
+                    <div className="education-card">
+                      <Form id={_id} edit />
+                    </div>
+                  ) : (
+                    <div className="education-card">
+                      <div className="education-wrapper">
+                        <div className="education-detail">
+                          <div>{school}</div>
+                          <div>
+                            {degree} in {fieldofstudy}
+                          </div>
+                          <div>{getRangeYear(from, to)}</div>
+                          <div>{description}</div>
+                        </div>
+                        <div className="btn-action">
+                          <i
+                            onClick={() =>
+                              setToggle({ ...toggle, open: true, id: _id })
+                            }
+                            className="fa fa-edit"
+                          />
+                          <i
+                            onClick={() => dispatch(deleteEducation(_id))}
+                            className="fa fa-trash"
+                          />
+                        </div>
                       </div>
-                      <div>{getRangeYear(from, to)}</div>
-                      <div>{description}</div>
                     </div>
-                    <div className="btn-action">
-                      <i
-                        onClick={() =>
-                          setToggle({ ...toggle, open: true, id: _id })
-                        }
-                        className="fa fa-edit"
-                      />
-                      <i
-                        onClick={() => dispatch(deleteEducation(_id))}
-                        className="fa fa-trash"
-                      />
-                    </div>
-                  </div>
+                  )}
                 </div>
               </div>
             )
@@ -177,16 +204,16 @@ const EducationForm = ({ bio }: any) => {
           <div className="education-item__add">
             {toggle.open && !toggle.id ? (
               <div className="education-card">
-                <div className="education-wrapper">
-                  <Form />
-                </div>
+                <Form />
               </div>
             ) : (
-              <div
-                className="education-card"
-                onClick={() => setToggle({ ...toggle, open: true, id: "" })}
-              >
-                <i className="fa fa-plus toggle_add" />
+              <div className="education-item__last">
+                <div
+                  className="education-card"
+                  onClick={() => setToggle({ ...toggle, open: true, id: "" })}
+                >
+                  <i className="fa fa-plus toggle_add" />
+                </div>
               </div>
             )}
           </div>

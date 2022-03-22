@@ -97,32 +97,26 @@ const SocialForm = ({ bio }: any) => {
                         {soc.name}
                       </div>
                       <div className="btn-action">
-                        <button
+                        <i
                           onClick={() =>
                             setToggle({ ...toggle, open: true, id: soc._id })
                           }
-                          className="btn-edit"
-                        >
-                          Edit
-                        </button>
-                        <button
+                          className="fa fa-edit"
+                        ></i>
+                        <i
                           onClick={() => dispatch(deleteSocial(soc._id))}
-                          className="btn-delete"
-                        >
-                          Delete
-                        </button>
-                        <button className="btn-visit">
-                          <a href={soc.url} target="__blank">
-                            Visit
-                          </a>
-                        </button>
+                          className="fa fa-trash"
+                        ></i>
+                        <a href={soc.url} target="__blank">
+                          <i className="fa fa-arrow-right-from-bracket" />
+                        </a>
                       </div>
                     </>
                   )}
                 </div>
               </div>
             ))}
-          <div className="social-item">
+          <div className="social-item__add">
             {toggle.open && !toggle.id ? (
               <Form />
             ) : (

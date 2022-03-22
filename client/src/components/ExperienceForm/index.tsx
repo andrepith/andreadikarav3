@@ -254,20 +254,16 @@ const ExperienceForm = ({ bio }: any) => {
                       )}
                     </div>
                     <div className="experience-card__footer">
-                      <button
-                        className="btn-delete"
+                      <i
+                        className="fa fa-trash"
                         onClick={() => dispatch(deleteExperience(_id))}
-                      >
-                        Delete
-                      </button>
-                      <button
-                        className="btn-edit"
+                      />
+                      <i
+                        className="fa fa-edit"
                         onClick={() =>
                           setToggle({ ...toggle, open: true, id: _id })
                         }
-                      >
-                        Edit
-                      </button>
+                      />
                     </div>
                   </div>
                 )}

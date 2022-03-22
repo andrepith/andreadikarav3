@@ -16,6 +16,7 @@ import {
   UPDATE_PORTOFOLIO,
   ADD_EDUCATION,
   DELETE_EDUCATION,
+  UPDATE_EDUCATION,
 } from "src/store/types";
 
 const initialState = {
@@ -39,6 +40,7 @@ const bio = (
     case ADD_PORTOFOLIO:
     case UPDATE_PORTOFOLIO:
     case ADD_EDUCATION:
+    case UPDATE_EDUCATION:
       return { ...state, bio: payload };
     case DELETE_SOCIAL:
       return {
