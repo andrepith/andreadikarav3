@@ -19,7 +19,6 @@ export const getRangeYear = (
   const secondDate = new Date(secondTimestamp);
   const firstYear = getYear(firstTimestamp);
   const secondYear = getYear(secondTimestamp);
-  console.log(monthConverter(secondDate.getMonth()));
   if (current) {
     return (
       monthConverter(firstDate.getMonth()) + " " + firstYear + " - Present"

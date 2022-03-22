@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import Link from "next/link";
 import { IRootState } from "src/store/reducers";
 import withAuth from "@/components/HOC/WithAuth";
 import BioForm from "@/components/BioForm";
@@ -21,14 +22,21 @@ const Dashboard = () => {
   return (
     <div className="dashboard wrapper py-4">
       {bio && (
-        <>
+        <div>
           <BioForm bio={bio} />
           <SocialForm bio={bio} />
           <ExperienceForm bio={bio} />
           <PortofolioForm bio={bio} />
           <SkillForm bio={bio} />
           <EducationForm bio={bio} />
-        </>
+          <div className="back-to-home container">
+            <Link href="/">
+              <button className="btn btn-secondary">
+                To Home <i className="fa fa-arrow-right" />
+              </button>
+            </Link>
+          </div>
+        </div>
       )}
     </div>
   );
