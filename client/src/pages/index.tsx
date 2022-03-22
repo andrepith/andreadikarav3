@@ -1,22 +1,12 @@
-import type { GetStaticProps } from "next";
 import dynamic from "next/dynamic";
-import bioApi from "../lib/BioApi";
-import NavBar from "../components/NavBar";
-import LandingTop from "../components/LandingTop";
-import Experience from "../components/Experience";
+// import { getData } from "./api/bio";
+import NavBar from "src/components/NavBar";
+import LandingTop from "src/components/LandingTop";
+import Experience from "src/components/Experience";
 const Showcase = dynamic(() => import("@/components/Showcase"));
 const Skillset = dynamic(() => import("@/components/Skillset"));
 const Contact = dynamic(() => import("@/components/Contact"));
 const Footer = dynamic(() => import("@/components/Footer"));
-
-export const getStaticProps: GetStaticProps = async () => {
-  const bio = await bioApi();
-  return {
-    props: {
-      bio,
-    },
-  };
-};
 
 interface HomeProps {
   bio: {
@@ -39,6 +29,18 @@ interface HomeProps {
   };
 }
 
+export async function getServerSideProps({ req }: { req: any }) {
+  const protocol = req.headers["x-forwarded-proto"] || "http";
+  const baseUrl = req ? `${protocol}://${req.headers.host}` : "";
+  const res = await fetch(baseUrl + "/api/bio");
+  const bio = await res.json();
+  return {
+    props: {
+      bio,
+    },
+  };
+}
+
 const Home = ({ bio }: HomeProps) => {
   const scrollToExperience = () => {
     window.location.replace("/#experience");
@@ -53,7 +55,6 @@ const Home = ({ bio }: HomeProps) => {
   const scrollToContact = () => {
     window.location.replace("/#contact");
   };
-
   return (
     <>
       <NavBar
