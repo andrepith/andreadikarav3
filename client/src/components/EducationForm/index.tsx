@@ -67,7 +67,7 @@ const EducationForm = ({ bio }: any) => {
           to: htmlDateFormat(currentEdu.to),
         });
       }
-    }, []);
+    }, [edit, id]);
 
     return (
       <form onSubmit={onAddEducation}>

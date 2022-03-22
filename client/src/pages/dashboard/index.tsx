@@ -17,7 +17,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (!bio) dispatch(getBio());
-  }, []);
+  }, [bio, dispatch]);
 
   return (
     <div className="dashboard wrapper py-4">
@@ -31,9 +31,11 @@ const Dashboard = () => {
           <EducationForm bio={bio} />
           <div className="back-to-home container">
             <Link href="/">
-              <button className="btn btn-secondary">
-                To Home <i className="fa fa-arrow-right" />
-              </button>
+              <a>
+                <button className="btn btn-secondary">
+                  To Home <i className="fa fa-arrow-right" />
+                </button>
+              </a>
             </Link>
           </div>
         </div>

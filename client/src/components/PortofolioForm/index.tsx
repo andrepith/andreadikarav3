@@ -52,7 +52,7 @@ const PortofolioForm = ({ bio }: any) => {
           bio.portofolio.filter((item: { _id: string }) => item._id === id)[0]
         );
       }
-    }, [edit]);
+    }, [edit, id]);
 
     return (
       <form onSubmit={onAddSkill}>

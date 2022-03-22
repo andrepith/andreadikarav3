@@ -83,7 +83,7 @@ const ExperienceForm = ({ bio }: any) => {
         setDescArr(currentExp.description);
         toggleDisabled(currentExp.current);
       }
-    }, [edit]);
+    }, [edit, id]);
 
     return (
       <form onSubmit={onAddExperience}>

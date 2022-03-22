@@ -16,7 +16,7 @@ const withAuth = (Component: NextComponentType) => {
       } else {
         setLoaded(true);
       }
-    }, [auth]);
+    }, [auth, router]);
 
     return loaded ? <Component /> : <div />;
   };

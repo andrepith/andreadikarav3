@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import Script from "next/script";
 import { Provider } from "react-redux";
 import store from "../store";
 import { loadUser } from "src/store/actions/auth";
@@ -30,6 +31,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           content="Personal Website of Andre Adikara"
         ></meta>
       </Head>
+      <Script src="https://kit.fontawesome.com/7493c7897f.js" />
       <Provider store={store}>
         <Component {...pageProps} />
       </Provider>

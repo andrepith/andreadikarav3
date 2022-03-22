@@ -58,7 +58,7 @@ const BioForm = ({ bio }: any) => {
       }
       setFormData(bioData);
     }
-  }, [bio, getBio]);
+  }, [bio, dispatch]);
 
   const onChange = (e: any) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

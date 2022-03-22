@@ -39,7 +39,7 @@ const SkillForm = ({ bio }: any) => {
           bio.skillset.filter((soc: { _id: string }) => soc._id === id)[0]
         );
       }
-    }, [edit]);
+    }, [edit, id]);
 
     return (
       <form onSubmit={onAddSkill}>
