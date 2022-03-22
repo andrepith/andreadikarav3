@@ -236,8 +236,9 @@
   &__image {
     position: relative;
     width: 48px;
-    height: auto;
-    flex: 1;
+    height: 48px;
+    text-align: center;
+    margin: auto;
   }
 
   .form-group {
@@ -260,7 +261,7 @@
     .portofolio-item {
       &__add {
         .portofolio-card {
-          height: 88px;
+          min-height: 88px;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -359,6 +360,8 @@
 
 .back-to-home {
   margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
 
   button {
     border-radius: 4px;
